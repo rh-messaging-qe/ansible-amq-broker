@@ -25,8 +25,10 @@ Role Variables: Installation Variables
 
 Variables controlling broker installation parameters.
 
-| `jamq7_download_dest` | /tmp | Download destination |
-| `jamq7_install_dest` | /home/{{ jamq7_user }} | Install destination |
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
+| `jamq7_download_dest` | `/tmp` | Download destination |
+| `jamq7_install_dest` | `/home/{{ jamq7_user }}` | Install destination |
 | `jamq7_user` | jamq | System user to create for running JAMQ |
 | `jamq7_install_link` | jboss-amq-7 | Friendly link name for the installation dir |
 | `jamq7_download_url` | http://download-node-02.eng.bos.redhat.com/devel/candidates/amq/AMQ-BROKER-7.0.0.ER17/A-MQ7-7.0.0.ER17-redhat-1-bin.zip | Download URL |
@@ -39,6 +41,8 @@ Role Variables: Instance Variables
 
 Variables controlling the creation of a broker instance.
 
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
 | `jamq7_instance_journal_type` | nio | The type of the journal (aio or nio) |
 | `jamq7_instance_role` | amq | The role |
 | `jamq7_instance_user` | admin | The instance user |
@@ -53,6 +57,8 @@ Role Variables: Configuration Variables
 
 Variables controlling the configuration of a broker instance.
 
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
 | `jamq7_instance_type` | default | Instance type (one of default, default-cluster or default-ha) |
 
 
