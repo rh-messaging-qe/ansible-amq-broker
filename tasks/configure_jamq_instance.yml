@@ -1,8 +1,9 @@
 # ---
-# - name: Update bootstrap.xml according to host
-#   template:
-#     src: templates/bootstrap.j2
-#     dest: "{{ remote_dest }}/{{ broker_instance_dir }}/etc/bootstrap.xml"
-#     owner: jamq
-#     group: jamq
-#     mode: 0755
+- name: Configure JAMQ-7 instance
+  when: jamq7_instance_type is defined and jamq7_instance_type != "default"
+  template:
+    src: templates/{{ jamq7_instance_type }}/broker.xml
+    dest: "{{ jamq7_install_dest }}/{{ jamq7_instance_dir }}/etc/broker.xml"
+    owner: "{{ jamq7_user }}"
+    group: "{{ jamq7_user }}"
+    mode: 0755

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<configuration xmlns="urn:activemq" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:activemq /schema/artemis-configuration.xsd">
+  <core xmlns="urn:activemq:core">
+    <journal-buffer-timeout>4048000</journal-buffer-timeout>
+    <name>amq-{{ ansible_default_ipv4.address }}</name>
+    <journal-type>NIO</journal-type>
+    <journal-min-files>2</journal-min-files>
+    <journal-directory>./data/journal</journal-directory>
+    <persistence-enabled>true</persistence-enabled>
+    <journal-pool-files>-1</journal-pool-files>
+    <global-max-size>104857600</global-max-size>
+    <max-disk-usage>90</max-disk-usage>
+    <bindings-directory>./data/bindings</bindings-directory>
+    <disk-scan-period>5000</disk-scan-period>
+    <large-messages-directory>./data/large-messages</large-messages-directory>
+    <paging-directory>./data/paging</paging-directory>
+    <!-- Acceptors -->
+    <!-- Each acceptor defines a way in which connections can be made to the Apache ActiveMQ Artemis server -->
+    <acceptors>
+      <acceptor name="artemis">tcp://0.0.0.0:61616?tcpSendBufferSize=1048576;tcpReceiveBufferSize=1048576</acceptor>
+      <acceptor name="amqp">tcp://0.0.0.0:5672?protocols=AMQP</acceptor>
+      <acceptor name="stomp">tcp://0.0.0.0:61613?protocols=STOMP</acceptor>
+      <acceptor name="hornetq">tcp://0.0.0.0:5445?protocols=HORNETQ,STOMP</acceptor>
+      <acceptor name="mqtt">tcp://0.0.0.0:1883?protocols=MQTT</acceptor>
+      <!-- add acceptor to inter-servers communication -->
+      <!-- use explicit IP address -->
+      <acceptor name="netty-acceptor">tcp://0.0.0.0:{{ netty_connector_port }}</acceptor>
+    </acceptors>
+    <!-- Connectors -->
+    <!-- Whereas acceptors are used on the server to define how we accept connections,
+    connectors are used by a client to define how it connects to a server. -->
+    <connectors>
+      <!-- add connector to inter-servers communication -->
+      <!-- use explicit IP address -->
+      <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ netty_connector_port }}</connector>
+    </connectors>
+    <!-- Clustering configuration -->
+    <!-- A broadcast group is the means by which a server broadcasts connectors over the network.
+A connector defines a way in which a client (or other server) can make connections to the server. -->
+    <broadcast-groups>
+      <broadcast-group name="{{ jamq7_cluster_broadcast_group_name }}">
+        <group-address>{{ jamq7_cluster_broadcast_group_address }}</group-address>
+        <group-port>{{ jamq7_cluster_broadcast_group_port }}</group-port>
+        <broadcast-period>100</broadcast-period>
+        <connector-ref>netty-connector</connector-ref>
+      </broadcast-group>
+    </broadcast-groups>
+    <!-- While the broadcast group defines how connector information is broadcasted from a server,
+a discovery group defines how connector information is received from a broadcast endpoint
+(a UDP multicast address or JGroup channel). -->
+    <discovery-groups>
+      <discovery-group name="{{ jamq7_cluster_discovery_group_name }}">
+        <group-address>{{ jamq7_cluster_broadcast_group_address }}</group-address>
+        <group-port>{{ jamq7_cluster_broadcast_group_port }}</group-port>
+        <refresh-timeout>10000</refresh-timeout>
+      </discovery-group>
+    </discovery-groups>
+    <!-- When creating connections between nodes of a cluster to form a cluster connection,
+     Apache ActiveMQ Artemis uses a cluster user and cluster password -->
+    <cluster-user>{{ jamq7_cluster_username }}</cluster-user>
+    <cluster-password>{{ jamq7_cluster_password }}</cluster-password>
+    <!-- Cluster connections group servers into clusters so that messages can be load balanced between the nodes of the cluster -->
+    <cluster-connections>
+      <cluster-connection name="{{ jamq7_cluster_name }}">
+        <address>jms</address>
+        <connector-ref>netty-connector</connector-ref>
+        <retry-interval>500</retry-interval>
+        <use-duplicate-detection>true</use-duplicate-detection>
+        <!--NONE, ON_DEMAND, STRICT -->
+        <message-load-balancing>ON_DEMAND</message-load-balancing>
+        <!-- A symmetric cluster is probably the most common cluster topology.
+      To form a symmetric cluster every node in the cluster defines a cluster connection with the attribute max-hops set to 1
+      To form CHAIN topology we would set max-hops to 2 -->
+        <max-hops>1</max-hops>
+        <discovery-group-ref discovery-group-name="{{ jamq7_cluster_discovery_group_name }}"/>
+      </cluster-connection>
+    </cluster-connections>
+    <address-settings>
+      <address-setting match="#">
+        <max-size-bytes>-1</max-size-bytes>
+        <auto-create-jms-queues>false</auto-create-jms-queues>
+        <message-counter-history-day-limit>10</message-counter-history-day-limit>
+        <dead-letter-address>jms.queue.DLQ</dead-letter-address>
+        <address-full-policy>PAGE</address-full-policy>
+        <expiry-address>jms.queue.ExpiryQueue</expiry-address>
+        <redelivery-delay>0</redelivery-delay>
+        <!-- Message redistribution can be configured to kick in immediately after the last consumer on a queue is closed,
+          or to wait a configurable delay after the last consumer on a queue is closed before redistributing.
+          By default message redistribution is disabled. -->
+        <redistribution-delay>0</redistribution-delay>
+      </address-setting>
+    </address-settings>
+    <security-settings>
+      <security-setting match="#">
+        <permission roles="{{ jamq7_instance_role }}" type="createNonDurableQueue"/>
+        <permission roles="{{ jamq7_instance_role }}" type="deleteNonDurableQueue"/>
+        <permission roles="{{ jamq7_instance_role }}" type="createDurableQueue"/>
+        <permission roles="{{ jamq7_instance_role }}" type="deleteDurableQueue"/>
+        <permission roles="{{ jamq7_instance_role }}" type="createAddress"/>
+        <permission roles="{{ jamq7_instance_role }}" type="deleteAddress"/>
+        <permission roles="{{ jamq7_instance_role }}" type="consume"/>
+        <permission roles="{{ jamq7_instance_role }}" type="send"/>
+        <permission roles="{{ jamq7_instance_role }}" type="manage"/>
+        <permission roles="{{ jamq7_instance_role }}" type="browse"/>
+      </security-setting>
+    </security-settings>
+    <addresses>
+      <address name="DLQ">
+        <anycast>
+          <queue name="DLQ"/>
+        </anycast>
+      </address>
+      <address name="ExpiryQueue">
+        <anycast>
+          <queue name="ExpiryQueue"/>
+        </anycast>
+      </address>
+    </addresses>
+  </core>
+</configuration>

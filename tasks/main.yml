@@ -6,5 +6,7 @@
 - name: Create JAMQ 7 default instance
   include: create_jamq_instance.yml
   when: jamq7_skip_create is defined and jamq7_skip_create == false
-# - include: create_jamq_instance.yml
-# - include: configure_jamq_instance.yml
+
+- name: Configure JAMQ 7 default instance
+  include: configure_jamq_instance.yml
+  when: jamq7_skip_create is defined and jamq7_skip_create == false
