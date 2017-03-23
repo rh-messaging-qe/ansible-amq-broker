@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    jamq7_download_url: http://download-node-02.eng.bos.redhat.com/devel/candidates/amq/AMQ-BROKER-7.0.0.ER17/A-MQ7-7.0.0.ER17-redhat-1-bin.zip
+    jamq7_download_dest: /tmp
+    jamq7_install_dest: /home/{{ jamq7_user }}
+    jamq7_user: jamq
+    jamq7_install_link: jboss-amq-7
+    broker_instance_dir: jboss-amq-7-i0
+    broker_instance_jmx_port: 1099
+  roles:
+    - jamq-7-install

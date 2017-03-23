@@ -1,0 +1,29 @@
+---
+# tasks file for jamq7
+- name: Download distribution once to local dir to spread among nodes
+  get_url:
+    url: "{{ jamq7_download_url }}"
+    dest: "{{ jamq7_download_dest }}/{{ jamq7_download_url | basename}}"
+    force: no
+  register: dist_get
+
+- name: Create JAMQ user
+  shell: id {{ jamq7_user }} || (useradd -m -U {{ jamq7_user }} )
+
+- name: Unzip downloaded distribution to {{ jamq7_install_dest }}
+  unarchive:
+    src: "{{ jamq7_download_dest }}/{{ jamq7_download_url | basename }}"
+    dest: "{{ jamq7_install_dest }}/"
+    remote_src: True
+  register: dist_unzipped
+  when: dist_get.changed
+
+- name: Create link to broker install dir {{ jamq7_install_dest }}/{{ jamq7_install_link }}
+  file:
+    src: "{{ jamq7_install_dest }}/{{ jamq7_download_url | basename | regex_replace('-bin.zip$', '')}}"
+    dest: "{{ jamq7_install_dest }}/{{ jamq7_install_link }}"
+    state: link
+    mode: 0755
+    owner: "{{ jamq7_user }}"
+    group: "{{ jamq7_user }}"
+    force: true

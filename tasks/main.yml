@@ -1,0 +1,5 @@
+---
+# tasks file for jamq-7-default
+- include: get_jamq_distribution.yml
+# - include: create_jamq_instance.yml
+# - include: configure_jamq_instance.yml

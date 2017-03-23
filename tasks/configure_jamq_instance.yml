@@ -1,0 +1,8 @@
+# ---
+# - name: Update bootstrap.xml according to host
+#   template:
+#     src: templates/bootstrap.j2
+#     dest: "{{ remote_dest }}/{{ broker_instance_dir }}/etc/bootstrap.xml"
+#     owner: jamq
+#     group: jamq
+#     mode: 0755
