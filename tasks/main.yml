@@ -9,4 +9,4 @@
 
 - name: Configure JAMQ 7 default instance
   include: configure_jamq_instance.yml
-  when: jamq7_skip_create is defined and jamq7_skip_create == false
+  when: jamq7_skip_configure is defined and jamq7_skip_configure == false

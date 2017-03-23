@@ -6,6 +6,9 @@ jamq7_skip_install: false
 # Whether to skip creating an instance
 jamq7_skip_create: false
 
+# Whether to skip configuration step for a broker
+jamq7_skip_configure: true
+
 # Whether to install Java JVM and which one to install
 jamq7_broker_java_install: true
 jamq7_broker_java: java-1.8.0-openjdk-devel
