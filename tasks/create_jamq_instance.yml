@@ -1,13 +1,9 @@
 ---
-- name: Create dir for broker instance
-  file:
-   path: "{{ jamq7_install_dest }}/{{ broker_instance_dir }}"
-   state: directory
-   mode: 0755
-   owner: {{ jamq7_user }}
-   group: {{ jamq7_user }}
+- name: Ensure Java VM is present {{ jamq7_broker_java }}
+  when: jamq7_broker_java is defined and jamq7_broker_java_install is defined and jamq7_broker_java_install == true
+  yum: name={{ jamq7_broker_java }} state=present
 
 - name: Create broker instance
-  command: runuser -s ${SHELL} jamq -c './artemis create  --force --nio --role=amq --user=admin --require-login --password=admin --java-options="-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false " --name=amq {{ remote_dest }}/{{ broker_instance_dir }}'
+  command: runuser -s ${SHELL} jamq -c './artemis create {{ jamq7_instance_create_options }} --{{ jamq7_instance_journal_type }} --role={{ jamq7_instance_role }} --user={{ jamq7_instance_user }} --java-options="{{ jamq7_instance_create_java_options }}" --name=amq {{ jamq7_install_dest }}/{{ jamq7_instance_dir }}'
   args:
-    chdir: "{{ remote_dest }}/{{ broker_install_dir_link }}/bin"
+    chdir: "{{ jamq7_install_dest }}/{{ jamq7_install_link }}/bin"

@@ -7,7 +7,9 @@
     jamq7_install_dest: /home/{{ jamq7_user }}
     jamq7_user: jamq
     jamq7_install_link: jboss-amq-7
-    broker_instance_dir: jboss-amq-7-i0
-    broker_instance_jmx_port: 1099
+    jamq7_broker_java: java-1.8.0-openjdk-devel
+    jamq7_broker_java_install: true
+    jamq7_instance_dir: jboss-amq-7-i0
+    jamq7_instance_jmx_port: 1099
   roles:
     - jamq-7-install

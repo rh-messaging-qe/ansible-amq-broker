@@ -3,5 +3,8 @@
   include: get_jamq_distribution.yml
   when: jamq7_skip_install is defined and jamq7_skip_install == false
 
+- name: Create JAMQ 7 default instance
+  include: create_jamq_instance.yml
+  when: jamq7_skip_create is defined and jamq7_skip_create == false
 # - include: create_jamq_instance.yml
 # - include: configure_jamq_instance.yml
