@@ -4,6 +4,6 @@
   yum: name={{ jamq7_broker_java }} state=present
 
 - name: Create broker instance
-  command: runuser -s ${SHELL} jamq -c './artemis create {{ jamq7_instance_create_options }} --{{ jamq7_instance_journal_type }} --role={{ jamq7_instance_role }} --user={{ jamq7_instance_user }} --java-options="{{ jamq7_instance_create_java_options }}" --name=amq {{ jamq7_install_dest }}/{{ jamq7_instance_dir }}'
+  command: "{{ jamq7_instance_create_command }}"
   args:
     chdir: "{{ jamq7_install_dest }}/{{ jamq7_install_link }}/bin"
