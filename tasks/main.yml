@@ -1,5 +1,7 @@
 ---
-# tasks file for jamq-7-default
-- include: get_jamq_distribution.yml
+- name: Get JAMQ 7 distribution
+  include: get_jamq_distribution.yml
+  when: jamq7_skip_install is defined and jamq7_skip_install == false
+
 # - include: create_jamq_instance.yml
 # - include: configure_jamq_instance.yml

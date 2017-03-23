@@ -1,2 +1,3 @@
 ---
 # vars file for jamq-7-default
+jamq7_skip_install: false
