@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A RHN registration role suitable for internal use. It will not unsubscribe and re-register if the system is already registered.
+An AMQ Broker deployment role.
 
 Requirements
 ------------
