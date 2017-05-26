@@ -26,4 +26,4 @@
     jamq7_instance_dir: jboss-amq-7-i0
     jamq7_instance_jmx_port: 1099
   roles:
-    - jamq-7-install
+    - amq-broker
