@@ -13,13 +13,13 @@
 # limitations under the License.
 ---
 - name: Get JBoss AMQ 7 Broker
-  include: get_jamq_distribution.yml
+  include: get_amq_broker_distribution.yml
   when: amq_broker_skip_install is defined and amq_broker_skip_install == false
 
 - name: Create JBoss AMQ 7 Broker default instance
-  include: create_jamq_instance.yml
+  include: create_amq_broker_instance.yml
   when: amq_broker_skip_create is defined and amq_broker_skip_create == false
 
 - name: Configure JBoss AMQ 7 Broker default instance
-  include: configure_jamq_instance.yml
+  include: configure_amq_broker_instance.yml
   when: amq_broker_skip_configure is defined and amq_broker_skip_configure == false
