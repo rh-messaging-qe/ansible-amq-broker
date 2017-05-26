@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-- name: Ensure Java VM is present {{ jamq7_broker_java }}
-  when: jamq7_broker_java is defined and jamq7_broker_java_install is defined and jamq7_broker_java_install == true
-  yum: name={{ jamq7_broker_java }} state=present
+- name: Ensure Java VM is present {{ amq_broker_jvm }}
+  when: amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
+  yum: name={{ amq_broker_jvm }} state=present
 
 - name: Create broker instance
-  command: "{{ jamq7_instance_create_command }}"
+  command: "{{ amq_broker_instance_create_command }}"
   args:
-    chdir: "{{ jamq7_install_dest }}/{{ jamq7_install_link }}/bin"
+    chdir: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}/bin"

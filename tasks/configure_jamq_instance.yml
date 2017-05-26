@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ---
-- name: Configure JAMQ-7 instance
-  when: jamq7_instance_type is defined and jamq7_instance_type != "default"
+- name: Configure JBoss AMQ 7 Broker instance
+  when: amq_broker_instance_type is defined and amq_broker_instance_type != "default"
   template:
-    src: templates/{{ jamq7_instance_type }}/broker.xml
-    dest: "{{ jamq7_install_dest }}/{{ jamq7_instance_dir }}/etc/broker.xml"
-    owner: "{{ jamq7_user }}"
-    group: "{{ jamq7_user }}"
+    src: templates/{{ amq_broker_instance_type }}/broker.xml
+    dest: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/etc/broker.xml"
+    owner: "{{ amq_broker_user }}"
+    group: "{{ amq_broker_user }}"
     mode: 0755

@@ -12,38 +12,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-# defaults file for jamq-7-default
+# defaults file for amq-broker
 # Whether to skip install
-jamq7_skip_install: false
+amq_broker_skip_install: false
 
 # Whether to skip creating an instance
-jamq7_skip_create: false
+amq_broker_skip_create: false
 
 # Whether to skip configuration step for a broker
-jamq7_skip_configure: true
+amq_broker_skip_configure: true
 
 # Whether to install Java JVM and which one to install
-jamq7_broker_java_install: true
-jamq7_broker_java: java-1.8.0-openjdk-devel
+amq_broker_jvm_install: true
+amq_broker_jvm: java-1.8.0-openjdk-devel
 
 # Journal type for the broker instance
-jamq7_instance_journal_type: nio
-jamq7_instance_role: amq
-jamq7_instance_user: admin
-jamq7_instance_web_host: 0.0.0.0
-jamq7_instance_create_options: "--force --require-login --password=admin --http-host {{ jamq7_instance_web_host }} "
-jamq7_instance_jmx_port: 1099
-jamq7_instance_create_java_options: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ jamq7_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ jamq7_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
-jamq7_instance_create_command: runuser -s ${SHELL} jamq -c './artemis create {{ jamq7_instance_create_options }} --{{ jamq7_instance_journal_type }} --role={{ jamq7_instance_role }} --user={{ jamq7_instance_user }} --java-options="{{ jamq7_instance_create_java_options }}" --name=amq {{ jamq7_install_dest }}/{{ jamq7_instance_dir }}'
+amq_broker_instance_journal_type: nio
+amq_broker_instance_role: amq
+amq_broker_instance_user: admin
+amq_broker_instance_web_host: 0.0.0.0
+amq_broker_instance_create_options: "--force --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} "
+amq_broker_instance_jmx_port: 1099
+amq_broker_instance_create_java_options: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+amq_broker_instance_create_command: runuser -s ${SHELL} jamq -c './artemis create {{ amq_broker_instance_create_options }} --{{ amq_broker_instance_journal_type }} --role={{ amq_broker_instance_role }} --user={{ amq_broker_instance_user }} --java-options="{{ amq_broker_instance_create_java_options }}" --name=amq {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}'
 
-jamq7_instance_type: default
+amq_broker_instance_type: default
 
-jamq7_cluster_broadcast_group_name: my-broadcast-group
-jamq7_cluster_broadcast_group_address: 231.7.7.7
-jamq7_cluster_broadcast_group_port: 9876
+amq_broker_cluster_broadcast_group_name: my-broadcast-group
+amq_broker_cluster_broadcast_group_address: 231.7.7.7
+amq_broker_cluster_broadcast_group_port: 9876
 
-jamq7_cluster_discovery_group_name: my-discovery-group
-jamq7_cluster_name: my-cluster
+amq_broker_cluster_discovery_group_name: my-discovery-group
+amq_broker_cluster_name: my-cluster
 
-jamq7_cluster_username: ACTIVEMQ.CLUSTER.ADMIN.USER
-jamq7_cluster_password: redhat
+amq_broker_cluster_username: ACTIVEMQ.CLUSTER.ADMIN.USER
+amq_broker_cluster_password: redhat

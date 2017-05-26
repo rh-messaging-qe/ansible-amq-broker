@@ -53,9 +53,9 @@
     <!-- A broadcast group is the means by which a server broadcasts connectors over the network.
 A connector defines a way in which a client (or other server) can make connections to the server. -->
     <broadcast-groups>
-      <broadcast-group name="{{ jamq7_cluster_broadcast_group_name }}">
-        <group-address>{{ jamq7_cluster_broadcast_group_address }}</group-address>
-        <group-port>{{ jamq7_cluster_broadcast_group_port }}</group-port>
+      <broadcast-group name="{{ amq_broker_cluster_broadcast_group_name }}">
+        <group-address>{{ amq_broker_cluster_broadcast_group_address }}</group-address>
+        <group-port>{{ amq_broker_cluster_broadcast_group_port }}</group-port>
         <broadcast-period>100</broadcast-period>
         <connector-ref>netty-connector</connector-ref>
       </broadcast-group>
@@ -64,19 +64,19 @@ A connector defines a way in which a client (or other server) can make connectio
 a discovery group defines how connector information is received from a broadcast endpoint
 (a UDP multicast address or JGroup channel). -->
     <discovery-groups>
-      <discovery-group name="{{ jamq7_cluster_discovery_group_name }}">
-        <group-address>{{ jamq7_cluster_broadcast_group_address }}</group-address>
-        <group-port>{{ jamq7_cluster_broadcast_group_port }}</group-port>
+      <discovery-group name="{{ amq_broker_cluster_discovery_group_name }}">
+        <group-address>{{ amq_broker_cluster_broadcast_group_address }}</group-address>
+        <group-port>{{ amq_broker_cluster_broadcast_group_port }}</group-port>
         <refresh-timeout>10000</refresh-timeout>
       </discovery-group>
     </discovery-groups>
     <!-- When creating connections between nodes of a cluster to form a cluster connection,
 		 Apache ActiveMQ Artemis uses a cluster user and cluster password -->
-    <cluster-user>{{ jamq7_cluster_username }}</cluster-user>
-    <cluster-password>{{ jamq7_cluster_password }}</cluster-password>
+    <cluster-user>{{ amq_broker_cluster_username }}</cluster-user>
+    <cluster-password>{{ amq_broker_cluster_password }}</cluster-password>
     <!-- Cluster connections group servers into clusters so that messages can be load balanced between the nodes of the cluster -->
     <cluster-connections>
-      <cluster-connection name="{{ jamq7_cluster_name }}">
+      <cluster-connection name="{{ amq_broker_cluster_name }}">
         <address>jms</address>
         <connector-ref>netty-connector</connector-ref>
         <retry-interval>500</retry-interval>
@@ -87,7 +87,7 @@ a discovery group defines how connector information is received from a broadcast
 			To form a symmetric cluster every node in the cluster defines a cluster connection with the attribute max-hops set to 1
 			To form CHAIN topology we would set max-hops to 2 -->
         <max-hops>1</max-hops>
-        <discovery-group-ref discovery-group-name="{{ jamq7_cluster_discovery_group_name }}"/>
+        <discovery-group-ref discovery-group-name="{{ amq_broker_cluster_discovery_group_name }}"/>
       </cluster-connection>
     </cluster-connections>
     <ha-policy>
@@ -112,16 +112,16 @@ a discovery group defines how connector information is received from a broadcast
     </address-settings>
     <security-settings>
       <security-setting match="#">
-        <permission roles="{{ jamq7_instance_role }}" type="createNonDurableQueue"/>
-        <permission roles="{{ jamq7_instance_role }}" type="deleteNonDurableQueue"/>
-        <permission roles="{{ jamq7_instance_role }}" type="createDurableQueue"/>
-        <permission roles="{{ jamq7_instance_role }}" type="deleteDurableQueue"/>
-        <permission roles="{{ jamq7_instance_role }}" type="createAddress"/>
-        <permission roles="{{ jamq7_instance_role }}" type="deleteAddress"/>
-        <permission roles="{{ jamq7_instance_role }}" type="consume"/>
-        <permission roles="{{ jamq7_instance_role }}" type="send"/>
-        <permission roles="{{ jamq7_instance_role }}" type="manage"/>
-        <permission roles="{{ jamq7_instance_role }}" type="browse"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="createNonDurableQueue"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="deleteNonDurableQueue"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="createDurableQueue"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="deleteDurableQueue"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="createAddress"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="deleteAddress"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="consume"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="send"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="manage"/>
+        <permission roles="{{ amq_broker_instance_role }}" type="browse"/>
       </security-setting>
     </security-settings>
     <addresses>

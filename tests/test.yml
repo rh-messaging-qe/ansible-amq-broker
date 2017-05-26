@@ -16,14 +16,14 @@
   remote_user: root
   vars:
     # Note: adjust the download location according to your environment
-    jamq7_download_url: http://host/path/to/amq/jboss-amq-7.0.0.redhat-1-bin.zip
-    jamq7_download_dest: /tmp
-    jamq7_install_dest: /home/{{ jamq7_user }}
-    jamq7_user: jamq
-    jamq7_install_link: jboss-amq-7
-    jamq7_broker_java: java-1.8.0-openjdk-devel
-    jamq7_broker_java_install: true
-    jamq7_instance_dir: jboss-amq-7-i0
-    jamq7_instance_jmx_port: 1099
+    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
+    amq_broker_download_dest: /tmp
+    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_user: jamq
+    amq_broker_install_link: jboss-amq-7
+    amq_broker_jvm: java-1.8.0-openjdk-devel
+    amq_broker_jvm_install: true
+    amq_broker_instance_dir: jboss-amq-7-i0
+    amq_broker_instance_jmx_port: 1099
   roles:
     - amq-broker
