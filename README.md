@@ -115,6 +115,11 @@ Testing
 2. Run:
 `make test`
 
+License
+-------
+
+Apache 2.0
+
 Author Information
 ------------------
 
