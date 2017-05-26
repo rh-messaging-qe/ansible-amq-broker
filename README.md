@@ -31,7 +31,7 @@ Variables controlling broker installation parameters.
 | `jamq7_install_dest` | `/home/{{ jamq7_user }}` | Install destination |
 | `jamq7_user` | jamq | System user to create for running JAMQ |
 | `jamq7_install_link` | jboss-amq-7 | Friendly link name for the installation dir |
-| `jamq7_download_url` | http://host/path/to/amq/AMQ-BROKER-7.0.0.ER17/A-MQ7-7.0.0.ER17-redhat-1-bin.zip | Download URL |
+| `jamq7_download_url` | http://host/path/to/amq/jboss-amq-7.0.0.redhat-1-bin.zip | Download URL |
 | `jamq7_broker_java_install` | true | Whether to install a Java JVM. |
 | `jamq7_broker_java` | java-1.8.0-openjdk-devel | The Java JVM to install. |
 
@@ -92,7 +92,7 @@ Including an example of how to use your role (for instance, with variables passe
 	- hosts: all
 		remote_user: root
 		vars:
-			jamq7_download_url: http://host/path/to/amq/AMQ-BROKER-7.0.0.ER17/A-MQ7-7.0.0.ER17-redhat-1-bin.zip
+			jamq7_download_url: http://host/path/to/amq/jboss-amq-7.0.0.redhat-1-bin.zip
 			jamq7_download_dest: /tmp
 			jamq7_install_dest: /home/{{ jamq7_user }}
 			jamq7_user: jamq
@@ -112,7 +112,9 @@ Testing
 
 `export TEST_INVENTORY=/home/opiske/code/infra/test-inventory-ansible/hosts`
 
-2. Run:
+2. Adjust the download URL location accordingly. The default URL points to a non-existent host which renders the test invalid.
+
+3. Run:
 `make test`
 
 License
