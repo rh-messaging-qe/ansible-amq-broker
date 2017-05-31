@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-- name: Ensure that wget is installed
-  yum: name="wget" state=present
+- name: Ensure that broker dependencies are installed
+  yum: name="{{ amq_broker_dependencies }}" state=present enablerepo=epel
 
 - name: Download distribution once to local dir to spread among nodes
   get_url:
