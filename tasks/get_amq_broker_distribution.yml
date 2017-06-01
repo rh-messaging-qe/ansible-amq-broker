@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-- name: Ensure that broker dependencies are installed
-  yum: name="{{ amq_broker_dependencies }}" state=present enablerepo=epel
+- name: Ensure that broker dependencies are installed (RPM-based)
+  when:
+    - ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Fedora'
+  package: name="{{ amq_broker_dependencies }}" state=present
 
 - name: Download distribution once to local dir to spread among nodes
   get_url:
@@ -24,9 +26,6 @@
 
 - name: Create JBoss AMQ 7 Broker user
   shell: id {{ amq_broker_user }} || (useradd -m -U {{ amq_broker_user }} )
-
-- name: Ensure that unzip is installed
-  yum: name="unzip" state=present
 
 - name: Unzip downloaded distribution to {{ amq_broker_install_dest }}
   unarchive:

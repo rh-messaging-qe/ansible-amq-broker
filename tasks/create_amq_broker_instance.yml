@@ -13,8 +13,9 @@
 # limitations under the License.
 ---
 - name: Ensure Java VM is present {{ amq_broker_jvm }}
-  when: amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
-  yum: name={{ amq_broker_jvm }} state=present
+  when:
+    - amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
+  package: name={{ amq_broker_jvm }} state=present
 
 - name: Create broker instance
   command: "{{ amq_broker_instance_create_command }}"
