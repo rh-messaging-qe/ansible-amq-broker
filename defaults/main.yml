@@ -54,6 +54,7 @@ amq_broker_instance_type: default
 amq_broker_cluster_broadcast_group_name: my-broadcast-group
 amq_broker_cluster_broadcast_group_address: 231.7.7.7
 amq_broker_cluster_broadcast_group_port: 9876
+amq_broker_cluster_netty_connector_port: 61617
 
 amq_broker_cluster_discovery_group_name: my-discovery-group
 amq_broker_cluster_name: my-cluster

@@ -39,7 +39,7 @@
       <acceptor name="mqtt">tcp://0.0.0.0:1883?protocols=MQTT</acceptor>
       <!-- add acceptor to inter-servers communication -->
       <!-- use explicit IP address -->
-      <acceptor name="netty-acceptor">tcp://0.0.0.0:{{ netty_connector_port }}</acceptor>
+      <acceptor name="netty-acceptor">tcp://0.0.0.0:{{ amq_broker_cluster_netty_connector_port }}</acceptor>
     </acceptors>
     <!-- Connectors -->
     <!-- Whereas acceptors are used on the server to define how we accept connections,
@@ -47,7 +47,7 @@
     <connectors>
       <!-- add connector to inter-servers communication -->
       <!-- use explicit IP address -->
-      <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ netty_connector_port }}</connector>
+      <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ amq_broker_cluster_netty_connector_port }}</connector>
     </connectors>
     <!-- Clustering configuration -->
     <!-- A broadcast group is the means by which a server broadcasts connectors over the network.

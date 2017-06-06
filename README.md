@@ -74,6 +74,7 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 | `amq_broker_cluster_broadcast_group_address` | 231.7.7.7 | Cluster group address |
 | `amq_broker_cluster_broadcast_group_port` | 9876 | Cluster group port |
 | `amq_broker_cluster_discovery_group_name` | my-discovery-group | Cluster discovery group |
+| `amq_broker_cluster_netty_connector_port` | 61617 | Cluster discovery group |
 | `amq_broker_cluster_name` | my-cluster | Cluster name |
 | `amq_broker_cluster_username` | ACTIVEMQ.CLUSTER.ADMIN.USER | Cluster username |
 | `amq_broker_cluster_password` | redhat | Cluster password |
