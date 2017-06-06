@@ -25,5 +25,8 @@
     amq_broker_jvm_install: true
     amq_broker_instance_dir: jboss-amq-7-i0
     amq_broker_instance_jmx_port: 1099
+    amq_broker_instance_queues:
+      - test.queue1
+      - test.queue2
   roles:
     - amq-broker
