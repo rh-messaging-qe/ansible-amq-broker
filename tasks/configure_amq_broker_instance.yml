@@ -15,7 +15,7 @@
 - name: Configure JBoss AMQ 7 Broker instance
   when: amq_broker_instance_type is defined and amq_broker_instance_type != "default"
   template:
-    src: templates/{{ amq_broker_instance_type }}/broker.xml
+    src: templates/{{ amq_broker_instance_type }}/broker.xml.j2
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/etc/broker.xml"
     owner: "{{ amq_broker_user }}"
     group: "{{ amq_broker_user }}"
