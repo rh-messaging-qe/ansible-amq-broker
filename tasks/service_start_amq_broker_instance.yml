@@ -14,10 +14,10 @@
 ---
 - name: Start JBoss AMQ 7 Broker default instance via service
   when: amq_broker_start_server is defined and amq_broker_start_server == true and amq_broker_service_start == true
-  command: "runuser - -s ${SHELL} jamq -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service start'"
+  command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service start'"
 
 
 # TODO unusable for our cases, because it does not return error code
 - name: Start JBoss AMQ 7 Broker default instance
   when: amq_broker_start_server is defined and amq_broker_start_server == true and amq_broker_service_start == false
-  command: "runuser - -s ${SHELL} jamq -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis run' &"
+  command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis run' &"
