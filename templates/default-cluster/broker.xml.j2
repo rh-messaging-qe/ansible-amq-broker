@@ -56,7 +56,7 @@ A connector defines a way in which a client (or other server) can make connectio
       <broadcast-group name="{{ amq_broker_cluster_broadcast_group_name }}">
         <group-address>{{ amq_broker_cluster_broadcast_group_address }}</group-address>
         <group-port>{{ amq_broker_cluster_broadcast_group_port }}</group-port>
-        <broadcast-period>100</broadcast-period>
+        <broadcast-period>{{ amq_broker_cluster_broadcast_period }}</broadcast-period>
         <connector-ref>netty-connector</connector-ref>
       </broadcast-group>
     </broadcast-groups>
