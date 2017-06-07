@@ -47,7 +47,7 @@ Variables controlling the creation of a broker instance.
 |-------------------|---------------------|----------------------|
 | `amq_broker_instance_name` | amq | The instance name |
 | `amq_broker_instance_journal_type` | nio | The type of the journal (aio or nio) |
-| `amq_broker_instance_create_force` | true | Whether to force instance creation |
+| `amq_broker_instance_create_force` | true | Whether to force instance creation (this does not create fresh broker instance) |
 | `amq_broker_instance_role` | amq | The role |
 | `amq_broker_instance_user` | admin | The instance user |
 | `amq_broker_instance_require_login` | true | Whether the instance requires login |

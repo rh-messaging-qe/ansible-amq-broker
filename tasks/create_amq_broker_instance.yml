@@ -17,6 +17,10 @@
     - amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
   package: name={{ amq_broker_jvm }} state=present
 
+- name: Remove broker instance directory
+  when: amq_broker_instance_create_force is defined and amq_broker_instance_create_force == true
+  file: path="{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}" state=absent
+
 - name: Create broker instance
   command: "{{ amq_broker_instance_create_command }}"
   args:
