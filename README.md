@@ -18,6 +18,8 @@ Variables controlling what will be executed by the role.
 | `amq_broker_skip_install` | false | Whether to skip installation process. |
 | `amq_broker_skip_create` | false | Whether to skip instance creation process. |
 | `amq_broker_skip_configure` | true | Whether to skip instance configure process. |
+| `amq_broker_start_server` | true | Whether to start broker instance. |
+| `amq_broker_service_start` | true | Whether to start/operate broker as service. (preferred way) |
 
 
 Role Variables: Installation Variables
@@ -56,6 +58,11 @@ Variables controlling the creation of a broker instance.
 | `amq_broker_instance_jmx_port` | 1099 | JMX port |
 | `amq_broker_instance_create_java_options` | -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false {{ }} | Java options to pass to the instance create command |
 | `amq_broker_instance_queues` | null | A list of queues to create when creating the instance |
+| `amq_broker_default_port`  | 61616 | Default broker port |
+| `amq_broker_default_amqp`  | 5672  | Default AMQP broker port |
+| `amq_broker_default_stomp` | 61613 | Default STOMP broker port |
+| `amq_broker_default_mqtt`  | 1883  | Default MQTT broker port |
+| `amq_broker_default_core`  | 5445  | Default Core broker port |
 
 
 Role Variables: Configuration Variables
