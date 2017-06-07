@@ -18,7 +18,7 @@
   <core xmlns="urn:activemq:core">
     <journal-buffer-timeout>4048000</journal-buffer-timeout>
     <name>amq-{{ ansible_default_ipv4.address }}</name>
-    <journal-type>{{ amq_broker_instance_journal_type }}</journal-type>
+    <journal-type>{{ (amq_broker_instance_journal_type == "nio") | ternary('NIO', 'ASYNC') }}</journal-type>
     <journal-min-files>2</journal-min-files>
     <journal-directory>./data/journal</journal-directory>
     <persistence-enabled>true</persistence-enabled>

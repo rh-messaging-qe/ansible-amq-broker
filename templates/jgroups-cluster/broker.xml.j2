@@ -30,7 +30,7 @@ under the License.
 
       <!-- this could be ASYNCIO or NIO
        -->
-      <journal-type>ASYNCIO</journal-type>
+      <journal-type>{{ (amq_broker_instance_journal_type == "nio") | ternary('NIO', 'ASYNC') }}</journal-type>
 
       <paging-directory>./data/paging</paging-directory>
 
