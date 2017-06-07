@@ -32,10 +32,34 @@
   roles:
     - amq-broker
 
+- name: test without queues
+  hosts: all
+  remote_user: root
+  vars:
+    # Skip the install part (which takes a long time)
+    amq_broker_skip_install: true
+    # Note: adjust the download location according to your environment
+    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
+    amq_broker_download_dest: /tmp
+    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_user: jamq
+    amq_broker_install_link: jboss-amq-7
+    amq_broker_jvm: java-1.8.0-openjdk-devel
+    amq_broker_jvm_install: true
+    amq_broker_instance_dir: jboss-amq-7-i0
+    amq_broker_instance_jmx_port: 1099
+    amq_broker_instance_queues:
+      - test.queue1
+      - test.queue2
+  roles:
+    - amq-broker
+
 - name: test without force
   hosts: all
   remote_user: root
   vars:
+    # Skip the install part (which takes a long time)
+    amq_broker_skip_install: true
     # Note: adjust the download location according to your environment
     amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
     amq_broker_download_dest: /tmp
@@ -47,5 +71,25 @@
     amq_broker_instance_dir: jboss-amq-7-i0
     amq_broker_instance_jmx_port: 1099
     amq_broker_instance_create_force: false
+  roles:
+    - amq-broker
+
+- name: test without require login
+  hosts: all
+  remote_user: root
+  vars:
+    # Skip the install part (which takes a long time)
+    amq_broker_skip_install: true
+    # Note: adjust the download location according to your environment
+    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
+    amq_broker_download_dest: /tmp
+    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_user: jamq
+    amq_broker_install_link: jboss-amq-7
+    amq_broker_jvm: java-1.8.0-openjdk-devel
+    amq_broker_jvm_install: true
+    amq_broker_instance_dir: jboss-amq-7-i0
+    amq_broker_instance_jmx_port: 1099
+    amq_broker_instance_create_require_login: false
   roles:
     - amq-broker

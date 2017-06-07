@@ -43,10 +43,13 @@ Variables controlling the creation of a broker instance.
 
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
+| `amq_broker_instance_name` | amq | The instance name |
 | `amq_broker_instance_journal_type` | nio | The type of the journal (aio or nio) |
 | `amq_broker_instance_create_force` | true | Whether to force instance creation |
 | `amq_broker_instance_role` | amq | The role |
 | `amq_broker_instance_user` | admin | The instance user |
+| `amq_broker_instance_require_login` | true | Whether the instance requires login |
+| `amq_broker_instance_password` | admin | The instance password |
 | `amq_broker_instance_web_host` | 0.0.0.0 | The listen address for the web administration interface |
 | `amq_broker_instance_rmi_host` | 0.0.0.0 | The listen address for the JMX RMI |
 | `amq_broker_instance_create_options` | --force --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} | Extra options for creating the instance |
