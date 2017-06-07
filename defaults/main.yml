@@ -75,3 +75,5 @@ amq_broker_cluster_name: my-cluster
 
 amq_broker_cluster_username: ACTIVEMQ.CLUSTER.ADMIN.USER
 amq_broker_cluster_password: redhat
+
+amq_broker_cluster_balancing: OFF

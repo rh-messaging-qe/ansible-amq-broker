@@ -82,7 +82,7 @@ a discovery group defines how connector information is received from a broadcast
         <retry-interval>500</retry-interval>
         <use-duplicate-detection>true</use-duplicate-detection>
         <!--NONE, ON_DEMAND, STRICT -->
-        <message-load-balancing>ON_DEMAND</message-load-balancing>
+        <message-load-balancing>{{ amq_broker_cluster_balancing }}</message-load-balancing>
         <!-- A symmetric cluster is probably the most common cluster topology.
       To form a symmetric cluster every node in the cluster defines a cluster connection with the attribute max-hops set to 1
       To form CHAIN topology we would set max-hops to 2 -->

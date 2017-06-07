@@ -84,6 +84,7 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 | `amq_broker_cluster_name` | my-cluster | Cluster name |
 | `amq_broker_cluster_username` | ACTIVEMQ.CLUSTER.ADMIN.USER | Cluster username |
 | `amq_broker_cluster_password` | redhat | Cluster password |
+| `amq_broker_cluster_balancing` | ON_DEMAND | Load balancing type (OFF, ON_DEMAND, STRICT) |
 
 
 Dependencies
