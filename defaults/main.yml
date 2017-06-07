@@ -22,6 +22,12 @@ amq_broker_skip_create: false
 # Whether to skip configuration step for a broker
 amq_broker_skip_configure: true
 
+# Whether to start broker as a service
+amq_broker_start_server: true
+amq_broker_service_start: true
+
+
+
 # Whether to install Java JVM and which one to install
 amq_broker_jvm_install: true
 amq_broker_jvm: java-1.8.0-openjdk-devel
