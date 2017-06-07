@@ -32,11 +32,11 @@
     <!-- Acceptors -->
     <!-- Each acceptor defines a way in which connections can be made to the Apache ActiveMQ Artemis server -->
     <acceptors>
-      <acceptor name="artemis">tcp://0.0.0.0:61616?tcpSendBufferSize=1048576;tcpReceiveBufferSize=1048576</acceptor>
-      <acceptor name="amqp">tcp://0.0.0.0:5672?protocols=AMQP</acceptor>
-      <acceptor name="stomp">tcp://0.0.0.0:61613?protocols=STOMP</acceptor>
-      <acceptor name="hornetq">tcp://0.0.0.0:5445?protocols=HORNETQ,STOMP</acceptor>
-      <acceptor name="mqtt">tcp://0.0.0.0:1883?protocols=MQTT</acceptor>
+      <acceptor name="artemis">tcp://0.0.0.0:{{ amq_broker_default_port }}?tcpSendBufferSize=1048576;tcpReceiveBufferSize=1048576</acceptor>
+      <acceptor name="amqp">tcp://0.0.0.0:{{ amq_broker_default_amqp }}?protocols=AMQP</acceptor>
+      <acceptor name="stomp">tcp://0.0.0.0:{{ amq_broker_default_stomp }}?protocols=STOMP</acceptor>
+      <acceptor name="hornetq">tcp://0.0.0.0:{{ amq_broker_default_core }}?protocols=HORNETQ,STOMP</acceptor>
+      <acceptor name="mqtt">tcp://0.0.0.0:{{ amq_broker_default_mqtt }}?protocols=MQTT</acceptor>
       <!-- add acceptor to inter-servers communication -->
       <!-- use explicit IP address -->
       <acceptor name="netty-acceptor">tcp://0.0.0.0:{{ netty_connector_port }}</acceptor>
