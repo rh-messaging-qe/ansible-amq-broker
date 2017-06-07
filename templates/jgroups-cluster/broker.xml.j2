@@ -63,7 +63,7 @@ under the License.
 
       <connectors>
          <!-- Connector to me -->
-         <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ netty_connector_port }}</connector>
+         <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ amq_broker_cluster_netty_connector_port }}</connector>
       </connectors>
       <address-settings>
          <!--default for catch all-->
