@@ -38,7 +38,11 @@ amq_broker_instance_role: amq
 amq_broker_instance_user: admin
 amq_broker_instance_web_host: 0.0.0.0
 amq_broker_instance_rmi_host: 0.0.0.0
-amq_broker_instance_create_options: "--force --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} "
+
+amq_broker_instance_create_force: true
+amq_broker_instance_create_force_args: "{{ amq_broker_instance_create_force | ternary('--force','') }}"
+
+amq_broker_instance_create_options: "{{ amq_broker_instance_create_force_args }} --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} "
 amq_broker_instance_jmx_port: 1099
 amq_broker_instance_create_queue_args: "{% if amq_broker_instance_queues is defined %} --queues {{ amq_broker_instance_queues | join(',') }} {% else %} '' {% endif %}"
 amq_broker_instance_create_java_options: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ amq_broker_instance_rmi_host }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
