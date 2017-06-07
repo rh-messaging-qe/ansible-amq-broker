@@ -79,7 +79,7 @@ Variables controlling the configuration of a broker instance.
 
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
-| `amq_broker_instance_type` | default | Instance type (one of default, default-cluster or default-ha) |
+| `amq_broker_instance_type` | default | Instance type (one of default, default-cluster, default-ha or jgroups-cluster) |
 
 
 
