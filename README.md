@@ -46,7 +46,8 @@ Variables controlling the creation of a broker instance.
 | `amq_broker_instance_journal_type` | nio | The type of the journal (aio or nio) |
 | `amq_broker_instance_role` | amq | The role |
 | `amq_broker_instance_user` | admin | The instance user |
-| `amq_broker_instance_web_host` | 0.0.0.0 | |
+| `amq_broker_instance_web_host` | 0.0.0.0 | The listen address for the web administration interface |
+| `amq_broker_instance_rmi_host` | 0.0.0.0 | The listen address for the JMX RMI |
 | `amq_broker_instance_create_options` | --force --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} | Extra options for creating the instance |
 | `amq_broker_instance_jmx_port` | 1099 | JMX port |
 | `amq_broker_instance_create_java_options` | -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false {{ }} | Java options to pass to the instance create command |
