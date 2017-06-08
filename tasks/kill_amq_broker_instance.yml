@@ -16,4 +16,3 @@
   when: amq_broker_service_start is defined and amq_broker_service_start == true
   command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service force-stop'"
   register: force_stop
-  # notify: "app killer"

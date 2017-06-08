@@ -36,6 +36,6 @@
 
 
 - name: Kill application with SIGKILL
-  when: force_stop_status.stdout != 0
-  command: "kill $(pgrep -u jamq java)"
+  when: force_stop_status.rc != 0
+  command: "kill $(pgrep -u {{ amq_broker_user }} java)"
   become: yes
