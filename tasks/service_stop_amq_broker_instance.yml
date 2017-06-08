@@ -12,8 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+- name: Check if user directory exists
+  stat: path="{{ amq_broker_install_dest }}"
+  register: amq_broker_path_st
+
 - name: Stop JBoss AMQ 7 Broker default instance via service
-  when: amq_broker_service_start is defined and amq_broker_service_start == true
+  when:
+    - amq_broker_service_start is defined and amq_broker_service_start == true
+    - amq_broker_path_st.stat.exists and amq_broker_path_st.stat.isdir is defined
   command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service stop'"
   register: stop_result
 
