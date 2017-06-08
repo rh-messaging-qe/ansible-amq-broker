@@ -15,8 +15,13 @@
 - name: Stop JBoss AMQ 7 Broker default instance via service
   when: amq_broker_service_start is defined and amq_broker_service_start == true
   command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service stop'"
-
+  register: stop_result
 
 - name: Stop JBoss AMQ 7 Broker default instance
   when: amq_broker_service_start is defined and amq_broker_service_start == false
   command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis stop'"
+  register: stop_result
+
+- name: Kill JBoss AMQ 7 Broker
+  when: stop_result | failed and amq_broker_force_kill is defined and amq_broker_force_kill == true
+  include: kill_amq_broker_instance.yml

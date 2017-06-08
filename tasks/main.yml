@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+
+# Always perform this check, not via handler
+- name: Stop JBoss AMQ 7 Broker default instance
+  include: service_stop_amq_broker_instance.yml
+
 - name: Get JBoss AMQ 7 Broker
   include: get_amq_broker_distribution.yml
   when: amq_broker_skip_install is defined and amq_broker_skip_install == false
-
-# Stop if some broker was running
-- name: Stop JBoss AMQ 7 Broker default instance
-  include: service_stop_amq_broker_instance.yml
-  ignore_errors: yes
 
 - name: Create JBoss AMQ 7 Broker default instance
   include: create_amq_broker_instance.yml
@@ -28,7 +28,3 @@
 - name: Configure JBoss AMQ 7 Broker default instance
   include: configure_amq_broker_instance.yml
   when: amq_broker_skip_configure is defined and amq_broker_skip_configure == false
-
-- name: Start JBoss AMQ 7 Broker default instance
-  include: service_start_amq_broker_instance.yml
-  when: amq_broker_start_server is defined and amq_broker_start_server == true
