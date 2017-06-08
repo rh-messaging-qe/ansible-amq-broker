@@ -25,3 +25,6 @@
   command: "{{ amq_broker_instance_create_command }}"
   args:
     chdir: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}/bin"
+  # wait_for:
+  #   - delay: 5
+  notify: "Start JBoss AMQ 7 Broker default instance via service"

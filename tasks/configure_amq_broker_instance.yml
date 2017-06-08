@@ -20,6 +20,7 @@
     owner: "{{ amq_broker_user }}"
     group: "{{ amq_broker_user }}"
     mode: 0755
+  notify: "Start JBoss AMQ 7 Broker default instance via service"
 
 - name: Configure JBoss AMQ 7 Broker cluster instance using jgroups
   when: amq_broker_instance_type is defined and amq_broker_instance_type == "jgroups-cluster"
@@ -29,3 +30,4 @@
     owner: "{{ amq_broker_user }}"
     group: "{{ amq_broker_user }}"
     mode: 0755
+  notify: "Start JBoss AMQ 7 Broker default instance via service"

@@ -13,3 +13,29 @@
 # limitations under the License.
 ---
 # handlers file for amq-broker
+
+# ============ Broker operations ============
+
+# Start the broker
+- name: Start JBoss AMQ 7 Broker default instance via service
+  when: amq_broker_start_server is defined and amq_broker_start_server == true and amq_broker_service_start == true
+  command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service start'"
+  listen: "start amq broker service"
+
+# Stop the broker
+- name: Stop JBoss AMQ 7 Broker default instance via service
+  when: amq_broker_service_start is defined and amq_broker_service_start == true
+  command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service stop'"
+  listen: "stop amq broker service"
+
+# Restart broker
+- name: Restart JBoss AMQ 7 Broker default instance via service
+  when: amq_broker_service_start is defined and amq_broker_service_start == true
+  command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service restart'"
+  listen: "restart amq broker servvice"
+
+
+- name: Kill application with SIGKILL
+  when: force_stop_status.stdout != 0
+  command: "kill $(pgrep -u jamq java)"
+  become: yes
