@@ -20,7 +20,7 @@ Variables controlling what will be executed by the role.
 | `amq_broker_skip_configure` | true | Whether to skip instance configure process. |
 | `amq_broker_start_server` | true | Whether to start broker instance. |
 | `amq_broker_service_start` | true | Whether to start/operate broker as service. (preferred way) |
-
+| `amq_broker_force_kill` | false | Whether to allow kill broker or not. |
 
 Role Variables: Installation Variables
 --------------

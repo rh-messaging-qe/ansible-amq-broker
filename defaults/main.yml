@@ -25,7 +25,7 @@ amq_broker_skip_configure: true
 # Whether to start broker as a service
 amq_broker_start_server: true
 amq_broker_service_start: true
-
+amq_broker_force_kill: false
 
 
 # Whether to install Java JVM and which one to install
