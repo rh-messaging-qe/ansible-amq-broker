@@ -33,7 +33,7 @@ Variables controlling broker installation parameters.
 | `amq_broker_install_dest` | `/home/{{ amq_broker_user }}` | Install destination |
 | `amq_broker_user` | jamq | System user to create for running JBoss AMQ 7 Broker |
 | `amq_broker_install_link` | jboss-amq-7 | Friendly link name for the installation dir |
-| `amq_broker_download_url` | http://host/path/to/amq/jboss-amq-7.0.0.redhat-1-bin.zip | Download URL |
+| `amq_broker_download_url` | {{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') }} | Download URL |
 | `amq_broker_jvm_install` | true | Whether to install a Java JVM. |
 | `amq_broker_jvm` | java-1.8.0-openjdk-devel | The Java JVM to install. |
 

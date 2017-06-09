@@ -27,6 +27,7 @@ amq_broker_start_server: true
 amq_broker_service_start: true
 amq_broker_force_kill: false
 
+amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') }}"
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user }}
 amq_broker_install_link: jboss-amq-7

@@ -16,8 +16,7 @@
   hosts: all
   remote_user: root
   vars:
-    # Note: adjust the download location according to your environment
-    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
+    # Note: for
     amq_broker_download_dest: /tmp
     amq_broker_install_dest: /home/{{ amq_broker_user }}
     amq_broker_user: jamq
@@ -38,8 +37,6 @@
   vars:
     # Skip the install part (which takes a long time)
     amq_broker_skip_install: true
-    # Note: adjust the download location according to your environment
-    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
     amq_broker_download_dest: /tmp
     amq_broker_install_dest: /home/{{ amq_broker_user }}
     amq_broker_user: jamq
@@ -60,8 +57,6 @@
   vars:
     # Skip the install part (which takes a long time)
     amq_broker_skip_install: true
-    # Note: adjust the download location according to your environment
-    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
     amq_broker_download_dest: /tmp
     amq_broker_install_dest: /home/{{ amq_broker_user }}
     amq_broker_user: jamq
@@ -80,8 +75,6 @@
   vars:
     # Skip the install part (which takes a long time)
     amq_broker_skip_install: true
-    # Note: adjust the download location according to your environment
-    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
     amq_broker_download_dest: /tmp
     amq_broker_install_dest: /home/{{ amq_broker_user }}
     amq_broker_user: jamq
@@ -97,9 +90,5 @@
 - name: test install with the defaults
   hosts: all
   remote_user: root
-  vars:
-    # Note: adjust the download location according to your environment
-    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
-
   roles:
     - amq-broker
