@@ -27,6 +27,10 @@ amq_broker_start_server: true
 amq_broker_service_start: true
 amq_broker_force_kill: false
 
+amq_broker_download_dest: /tmp
+amq_broker_install_dest: /home/{{ amq_broker_user }}
+amq_broker_install_link: jboss-amq-7
+
 
 # Whether to install Java JVM and which one to install
 amq_broker_jvm_install: true
@@ -37,6 +41,7 @@ amq_broker_user: jamq
 
 # Journal type for the broker instance
 amq_broker_instance_journal_type: nio
+amq_broker_instance_dir: jboss-amq-7-i0
 amq_broker_instance_name: amq
 amq_broker_instance_role: amq
 amq_broker_instance_user: admin

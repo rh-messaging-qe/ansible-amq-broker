@@ -93,3 +93,13 @@
     amq_broker_instance_create_require_login: false
   roles:
     - amq-broker
+
+- name: test install with the defaults
+  hosts: all
+  remote_user: root
+  vars:
+    # Note: adjust the download location according to your environment
+    amq_broker_download_url: http://ooo.englab.brq.redhat.com/packages/mrgm/jboss_amq/7.0.0/jboss-amq-7.0.0.redhat-1-bin.zip
+
+  roles:
+    - amq-broker
