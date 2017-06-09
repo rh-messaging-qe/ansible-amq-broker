@@ -13,7 +13,7 @@
 # limitations under the License.
 ---
 - name: Check if user directory exists
-  stat: path="{{ amq_broker_install_dest }}"
+  stat: path="{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}"
   register: amq_broker_path_st
 
 - name: Stop JBoss AMQ 7 Broker default instance via service
