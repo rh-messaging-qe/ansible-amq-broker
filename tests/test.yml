@@ -92,3 +92,11 @@
   remote_user: root
   roles:
     - amq-broker
+
+- name: test install with clustering defaults
+  hosts: all
+  remote_user: root
+  vars:
+    amq_broker_instance_clustered: true
+  roles:
+    - amq-broker

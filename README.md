@@ -54,6 +54,7 @@ Variables controlling the creation of a broker instance.
 | `amq_broker_instance_password` | admin | The instance password |
 | `amq_broker_instance_web_host` | 0.0.0.0 | The listen address for the web administration interface |
 | `amq_broker_instance_rmi_host` | 0.0.0.0 | The listen address for the JMX RMI |
+| `amq_broker_instance_broker_host` | undefined | The host address to use (used for clustering) |
 | `amq_broker_instance_create_options` | --force --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} | Extra options for creating the instance |
 | `amq_broker_instance_jmx_port` | 1099 | JMX port |
 | `amq_broker_instance_create_java_options` | -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false {{ }} | Java options to pass to the instance create command |
@@ -100,7 +101,7 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 | `amq_broker_cluster_password` | redhat | Cluster password |
 | `amq_broker_cluster_balancing` | ON_DEMAND | Load balancing type (OFF, ON_DEMAND, STRICT) |
 | `amq_broker_cluster_broadcast_period` | 2000 | Broadcast interval in milliseconds |
-
+| `amq_broker_cluster_max_hops` | 1 | Cluster max hopes (use for CHAIN or SYMETRIC clustering) |
 
 Dependencies
 ------------

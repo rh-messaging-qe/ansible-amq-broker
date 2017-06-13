@@ -48,20 +48,10 @@ amq_broker_instance_role: amq
 amq_broker_instance_user: admin
 amq_broker_instance_password: admin
 
+# This variable defaults to undefined
+# amq_broker_instance_broker_host:
 amq_broker_instance_web_host: 0.0.0.0
 amq_broker_instance_rmi_host: 0.0.0.0
-
-amq_broker_instance_create_force: true
-amq_broker_instance_create_force_args: "{{ amq_broker_instance_create_force | ternary('--force','') }}"
-
-amq_broker_instance_require_login: true
-amq_broker_instance_require_login_args: "{{ amq_broker_instance_require_login | ternary('--require-login','--allow-anonymous') }}"
-
-amq_broker_instance_create_options: "{{ amq_broker_instance_create_force_args }} {{ amq_broker_instance_require_login_args }} --password={{ amq_broker_instance_password }} --role={{ amq_broker_instance_role }} --user={{ amq_broker_instance_user }} --http-host {{ amq_broker_instance_web_host }} "
-amq_broker_instance_jmx_port: 1099
-amq_broker_instance_create_queue_args: "{% if amq_broker_instance_queues is defined %} --queues {{ amq_broker_instance_queues | join(',') }} {% else %} '' {% endif %}"
-amq_broker_instance_create_java_options: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ amq_broker_instance_rmi_host }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
-amq_broker_instance_create_command: runuser -s ${SHELL} {{ amq_broker_user }} -c './artemis create {{ amq_broker_instance_create_options }} --{{ amq_broker_instance_journal_type }} --java-options="{{ amq_broker_instance_create_java_options }}" --name={{ amq_broker_instance_name }} {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }} {{ amq_broker_instance_create_queue_args }}'
 
 amq_broker_default_port: 61616
 amq_broker_default_amqp: 5672
@@ -76,6 +66,8 @@ amq_broker_cluster_broadcast_group_address: 231.7.7.7
 amq_broker_cluster_broadcast_group_port: 9876
 amq_broker_cluster_netty_connector_port: 61617
 amq_broker_cluster_broadcast_period: 2000
+amq_broker_cluster_balancing: ON_DEMAND
+amq_broker_cluster_max_hops: 1
 
 amq_broker_cluster_discovery_group_name: my-discovery-group
 amq_broker_cluster_name: my-cluster
@@ -83,4 +75,26 @@ amq_broker_cluster_name: my-cluster
 amq_broker_cluster_username: ACTIVEMQ.CLUSTER.ADMIN.USER
 amq_broker_cluster_password: redhat
 
-amq_broker_cluster_balancing: OFF
+
+# Variables used for building the command like to create the instance
+amq_broker_instance_create_force: true
+amq_broker_instance_create_force_args: "{{ amq_broker_instance_create_force | ternary('--force','') }}"
+
+amq_broker_instance_require_login: true
+amq_broker_instance_require_login_args: "{{ amq_broker_instance_require_login | ternary('--require-login','--allow-anonymous') }}"
+
+amq_broker_instance_create_options: "{{ amq_broker_instance_create_force_args }} {{ amq_broker_instance_require_login_args }} --password={{ amq_broker_instance_password }} --role={{ amq_broker_instance_role }} --user={{ amq_broker_instance_user }} --http-host {{ amq_broker_instance_web_host }} "
+amq_broker_instance_jmx_port: 1099
+amq_broker_instance_create_queue_args: "{% if amq_broker_instance_queues is defined %} --queues {{ amq_broker_instance_queues | join(',') }} {% else %} '' {% endif %}"
+
+amq_broker_instance_clustered: false
+amq_broker_instance_clustered_args: "{{ amq_broker_instance_clustered | ternary('--clustered','--allow-anonymous') }}"
+
+amq_broker_instance_clustered_user_args: "{% if amq_broker_instance_clustered == true %} --cluster-user {{ amq_broker_cluster_username }} {% else %} '' {% endif %}"
+amq_broker_instance_clustered_password_args: "{% if amq_broker_instance_clustered == true %} --cluster-password {{ amq_broker_cluster_password }} {% else %} '' {% endif %}"
+amq_broker_instance_clustered_host_args: "{% if amq_broker_instance_clustered == true %} --host {{ amq_broker_instance_broker_host | default(ansible_default_ipv4.address) }} {% else %} '' {% endif %}"
+amq_broker_instance_clustered_balancing_args: "{% if amq_broker_instance_clustered == true %} --message-load-balancing {{ amq_broker_cluster_balancing }} {% else %} '' {% endif %}"
+amq_broker_instance_clustered_maxhops_args: "{% if amq_broker_instance_clustered == true %} --max-hops {{ amq_broker_cluster_max_hops }} {% else %} '' {% endif %}"
+
+amq_broker_instance_create_java_options: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ amq_broker_instance_rmi_host }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+amq_broker_instance_create_command: runuser -s ${SHELL} {{ amq_broker_user }} -c './artemis create {{ amq_broker_instance_create_options }} --{{ amq_broker_instance_journal_type }} --java-options="{{ amq_broker_instance_create_java_options }}" --name={{ amq_broker_instance_name }} {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }} {{ amq_broker_instance_create_queue_args }} {{ amq_broker_instance_clustered_args }} {{ amq_broker_instance_clustered_user_args }} {{ amq_broker_instance_clustered_password_args }} {{ amq_broker_instance_clustered_host_args }} {{ amq_broker_instance_clustered_balancing_args }} {{ amq_broker_instance_clustered_maxhops_args }}'
