@@ -17,6 +17,21 @@
     - amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
   package: name={{ amq_broker_jvm }} state=present
 
+
+- name: Get appropriate JVM version path
+  shell: 'alternatives --display java |grep -E "{{ amq_broker_jvm | regex_replace("-devel") }}.*priority" | cut -d" " -f 1'
+  register: java_alternatives_cmd
+
+- debug: msg="JVM path to set= {{ java_alternatives_cmd.stdout }}"
+
+- name: Get JVM executable
+  command: "which java"
+  register: java_bin
+
+- name: Set correct JVM version
+  when: java_alternatives_cmd.stdout is defined and java_alternatives_cmd != ""
+  command: alternatives --set java "{{ java_alternatives_cmd.stdout }}"
+
 - name: Remove broker instance directory
   when: amq_broker_instance_create_force is defined and amq_broker_instance_create_force == true
   file: path="{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}" state=absent
