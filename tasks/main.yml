@@ -13,6 +13,10 @@
 # limitations under the License.
 ---
 
+- name: Open JBoss AMQ 7 Broker ports
+  include: setup_iptables.yml
+  when: skip_iptables is defined and skip_iptables != true
+
 # Always perform this check, not via handler
 - name: Stop JBoss AMQ 7 Broker default instance
   include: service_stop_amq_broker_instance.yml
@@ -28,3 +32,7 @@
 - name: Configure JBoss AMQ 7 Broker default instance
   include: configure_amq_broker_instance.yml
   when: amq_broker_skip_configure is defined and amq_broker_skip_configure == false
+
+- name: Close JBoss AMQ 7 Broker ports
+  include: teardown_iptables.yml
+  when: skip_iptables is defined and skip_iptables != true and perform_teardown is defined and perform_teardown == true

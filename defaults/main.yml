@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+# Whether to skip setting firewall for broker
+skip_iptables: false
+# Whether to perform tear down actions (close ports, clean environment)
+perform_teardown: false
+
 # defaults file for amq-broker
 # Whether to skip install
 amq_broker_skip_install: false
@@ -20,7 +25,7 @@ amq_broker_skip_install: false
 amq_broker_skip_create: false
 
 # Whether to skip configuration step for a broker
-amq_broker_skip_configure: true
+amq_broker_skip_configure: false
 
 # Whether to start broker as a service
 amq_broker_start_server: true
@@ -58,6 +63,14 @@ amq_broker_default_amqp: 5672
 amq_broker_default_stomp: 61613
 amq_broker_default_mqtt: 1883
 amq_broker_default_core: 5445
+
+# TODO not used much
+#amq_broker_main_port
+#amq_broker_amqp_port
+#amq_broker_mqtt_port
+#amq_broker_core_port
+#amq_broker_stomp_port
+#amq_broker_jmx_port
 
 amq_broker_instance_type: default
 
