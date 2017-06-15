@@ -104,6 +104,8 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 | `amq_broker_cluster_balancing` | ON_DEMAND | Load balancing type (OFF, ON_DEMAND, STRICT) |
 | `amq_broker_cluster_broadcast_period` | 2000 | Broadcast interval in milliseconds |
 | `amq_broker_cluster_max_hops` | 1 | Cluster max hopes (use for CHAIN or SYMETRIC clustering) |
+| `amq_broker_cluster_replicated` | false | Set cluster to Replication mode |
+| `amq_broker_cluster_sharedstore` | false | Set cluster to Shared store mode |
 
 Dependencies
 ------------
