@@ -15,7 +15,7 @@
 
 - name: Open JBoss AMQ 7 Broker ports
   include: setup_iptables.yml
-  when: skip_iptables is defined and skip_iptables != true
+  when: skip_iptables is defined and skip_iptables != true and ansible_system == "Linux"
 
 # Always perform this check, not via handler
 - name: Stop JBoss AMQ 7 Broker default instance
