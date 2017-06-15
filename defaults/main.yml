@@ -109,6 +109,8 @@ amq_broker_instance_clustered_host_args: "{% if amq_broker_instance_clustered ==
 amq_broker_instance_clustered_balancing_args: "{% if amq_broker_instance_clustered == true %} --message-load-balancing {{ amq_broker_cluster_balancing }} {% else %} '' {% endif %}"
 amq_broker_instance_clustered_maxhops_args: "{% if amq_broker_instance_clustered == true %} --max-hops {{ amq_broker_cluster_max_hops }} {% else %} '' {% endif %}"
 
+amq_broker_cluster_replicated: false
+amq_broker_cluster_sharedstore: false
 amq_broker_instance_clustered_replicated_args: "{% if amq_broker_cluster_replicated == true %} --replicated {% else %} '' {% endif %}"
 amq_broker_instance_clustered_sharedstore_args: "{% if amq_broker_cluster_sharedstore == true %} --shared-store {% else %} '' {% endif %}"
 
