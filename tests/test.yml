@@ -12,8 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+- name: Bring up docker containers
+  hosts: localhost
+  vars:
+    inventory:
+      - name: docker_r1
+        image: "centos:centos7"
+      - name: docker_r2
+        image: "centos:centos6"
+  roles:
+    - role: provision_docker
+      provision_docker_inventory: "{{ inventory }}"
+
+- name: provision the containers
+  hosts: docker_containers
+  remote_user: root
+  roles:
+    - role: basic-server
+
 - name: test with queues
-  hosts: all
+  hosts: docker_containers
   remote_user: root
   vars:
     # Note: for
@@ -32,7 +50,7 @@
     - amq-broker
 
 - name: test without queues
-  hosts: all
+  hosts: docker_containers
   remote_user: root
   vars:
     # Skip the install part (which takes a long time)
@@ -52,7 +70,7 @@
     - amq-broker
 
 - name: test without force
-  hosts: all
+  hosts: docker_containers
   remote_user: root
   vars:
     # Skip the install part (which takes a long time)
@@ -70,7 +88,7 @@
     - amq-broker
 
 - name: test without require login
-  hosts: all
+  hosts: docker_containers
   remote_user: root
   vars:
     # Skip the install part (which takes a long time)
@@ -88,13 +106,13 @@
     - amq-broker
 
 - name: test install with the defaults
-  hosts: all
+  hosts: docker_containers
   remote_user: root
   roles:
     - amq-broker
 
 - name: test install with clustering defaults
-  hosts: all
+  hosts: docker_containers
   remote_user: root
   vars:
     amq_broker_instance_clustered: true
