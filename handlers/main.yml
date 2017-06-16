@@ -32,7 +32,7 @@
 - name: Restart JBoss AMQ 7 Broker default instance via service
   when: amq_broker_service_start is defined and amq_broker_service_start == true
   command: "runuser - -s ${SHELL} {{ amq_broker_user }} -c '{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service restart'"
-  listen: "restart amq broker servvice"
+  listen: "restart amq broker service"
 
 - name: Kill application with SIGKILL
   when: force_stop_status.rc != 0
