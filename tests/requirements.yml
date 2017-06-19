@@ -2,6 +2,6 @@
   scm: git
   name: provision_docker
 
-- src: git@github.com:msgqe/basic-server.git
+- src: https://github.com/msgqe/basic-server.git
   scm: git
   name: basic-server
