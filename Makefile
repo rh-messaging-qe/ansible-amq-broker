@@ -1,14 +1,16 @@
 TEST_INVENTORY?=tests/inventory
 
-containers = docker_r1 docker_r2 docker_r3 docker_r4 docker_r5
+containers = cnt-centos6 cnt-centos7
 
 clean:
-	rm ansible.cfg
+	rm -f ansible.cfg
 
-test-prepare:
+test-prepare: clean
+	printf '[defaults]\nroles_path=../:~/.ansible/user/roles/\n' >ansible.cfg
+	docker rm -f $(containers) || true
 	ansible-galaxy install -f -r tests/requirements.yml
 
-test:
-	printf '[defaults]\nroles_path=../' >ansible.cfg
-	ansible-playbook tests/test.yml -i $(TEST_INVENTORY)
+test: test-prepare
+	ansible-playbook -vvv tests/test.yml -i $(TEST_INVENTORY)
 	rm ansible.cfg
+	docker rm -f $(containers) || true
