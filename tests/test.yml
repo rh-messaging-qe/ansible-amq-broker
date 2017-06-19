@@ -16,13 +16,14 @@
   hosts: localhost
   vars:
     inventory:
-      - name: docker_r1
-        image: "centos:centos7"
-      - name: docker_r2
-        image: "centos:centos6"
+      - name: cnt-centos7
+        image: "chrismeyers/centos7"
+      - name: cnt-centos6
+        image: "chrismeyers/centos6"
   roles:
     - role: provision_docker
       provision_docker_inventory: "{{ inventory }}"
+      provision_docker_privileged: true
 
 - name: provision the containers
   hosts: docker_containers
@@ -34,7 +35,6 @@
   hosts: docker_containers
   remote_user: root
   vars:
-    # Note: for
     amq_broker_download_dest: /tmp
     amq_broker_install_dest: /home/{{ amq_broker_user }}
     amq_broker_user: jamq
