@@ -37,6 +37,8 @@
 
 - name: Create broker instance
   command: "{{ amq_broker_instance_create_command }}"
+  become: true
+  become_user: "{{ amq_broker_user }}"
   args:
     chdir: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}/bin"
   notify: "Start JBoss AMQ 7 Broker default instance via service"
