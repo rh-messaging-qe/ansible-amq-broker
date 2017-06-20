@@ -24,5 +24,5 @@ install:
 
 script:
   # Upstream Artemis works just as fine for this test
-  - export AMQ_BROKER_DOWNLOAD_URL=https://www.apache.org/dist/activemq/activemq-artemis/2.1.0/apache-artemis-2.1.0-bin.zip
+  - export AMQ_BROKER_DOWNLOAD_URL=http://www.apache.org/dist/activemq/activemq-artemis/2.1.0/apache-artemis-2.1.0-bin.zip
   - make test
