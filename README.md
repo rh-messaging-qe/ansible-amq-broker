@@ -139,16 +139,11 @@ Including an example of how to use your role (for instance, with variables passe
 
 
 Testing
--------
+----------------
 
-1. Export a test inventory, otherwise it will run on localhost:
+To test this role you need docker. If your system has docker, this role can be tested using the following command:
 
-`export TEST_INVENTORY=/home/opiske/code/infra/test-inventory-ansible/hosts`
-
-2. Adjust the download URL location accordingly. The default URL points to a non-existent host which renders the test invalid.
-
-3. Run:
-`make test`
+```make test```
 
 License
 -------
