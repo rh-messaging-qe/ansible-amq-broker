@@ -15,7 +15,7 @@
 
 - name: Open JBoss AMQ 7 Broker ports
   include: setup_iptables.yml
-  when: skip_iptables is defined and skip_iptables != true and ansible_system == "Linux"
+  when: amq_broker_skip_iptables is defined and amq_broker_skip_iptables != true and ansible_system == "Linux"
 
 # Always perform this check, not via handler
 - name: Stop JBoss AMQ 7 Broker default instance
@@ -35,4 +35,4 @@
 
 - name: Close JBoss AMQ 7 Broker ports
   include: teardown_iptables.yml
-  when: skip_iptables is defined and skip_iptables != true and perform_teardown is defined and perform_teardown == true
+  when: amq_broker_skip_iptables is defined and amq_broker_skip_iptables != true and amq_broker_perform_teardown is defined and amq_broker_perform_teardown == true

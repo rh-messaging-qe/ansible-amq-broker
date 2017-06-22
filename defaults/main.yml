@@ -13,9 +13,9 @@
 # limitations under the License.
 ---
 # Whether to skip setting firewall for broker
-skip_iptables: false
+amq_broker_skip_iptables: false
 # Whether to perform tear down actions (close ports, clean environment)
-perform_teardown: false
+amq_broker_perform_teardown: false
 
 # defaults file for amq-broker
 # Whether to skip install
@@ -115,4 +115,4 @@ amq_broker_instance_clustered_replicated_args: "{% if amq_broker_cluster_replica
 amq_broker_instance_clustered_sharedstore_args: "{% if amq_broker_cluster_sharedstore == true %} --shared-store {% else %} '' {% endif %}"
 
 amq_broker_instance_create_java_options: "-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ amq_broker_instance_rmi_host }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
-amq_broker_instance_create_command: ./artemis create {{ amq_broker_instance_create_options }} --{{ amq_broker_instance_journal_type }} --java-options="{{ amq_broker_instance_create_java_options }}" --name={{ amq_broker_instance_name }} {{ amq_broker_instance_create_queue_args }} {{ amq_broker_instance_clustered_args }} {{ amq_broker_instance_clustered_user_args }} {{ amq_broker_instance_clustered_password_args }} {{ amq_broker_instance_clustered_host_args }} {{ amq_broker_instance_clustered_balancing_args }} {{ amq_broker_instance_clustered_maxhops_args }} {{ amq_broker_instance_clustered_replicated_args }} {{ amq_broker_instance_clustered_sharedstore_args }} {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }} 
+amq_broker_instance_create_command: ./artemis create {{ amq_broker_instance_create_options }} --{{ amq_broker_instance_journal_type }} --java-options="{{ amq_broker_instance_create_java_options }}" --name={{ amq_broker_instance_name }} {{ amq_broker_instance_create_queue_args }} {{ amq_broker_instance_clustered_args }} {{ amq_broker_instance_clustered_user_args }} {{ amq_broker_instance_clustered_password_args }} {{ amq_broker_instance_clustered_host_args }} {{ amq_broker_instance_clustered_balancing_args }} {{ amq_broker_instance_clustered_maxhops_args }} {{ amq_broker_instance_clustered_replicated_args }} {{ amq_broker_instance_clustered_sharedstore_args }} {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}

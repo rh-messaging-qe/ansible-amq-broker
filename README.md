@@ -26,8 +26,8 @@ Variables controlling what will be executed by the role.
 | `amq_broker_start_server` | true | Whether to start broker instance. |
 | `amq_broker_service_start` | true | Whether to start/operate broker as service. (preferred way) |
 | `amq_broker_force_kill` | false | Whether to allow kill broker or not. |
-| `skip_iptables` | false | Whether to skip setting firewall for broker. |
-| `perform_teardown` | false | Whether to perform tear down actions or not (close ports, clean environment, etc). |
+| `amq_broker_skip_iptables` | false | Whether to skip setting firewall for broker. |
+| `amq_broker_perform_teardown` | false | Whether to perform tear down actions or not (close ports, clean environment, etc). |
 
 Role Variables: Installation Variables
 --------------
