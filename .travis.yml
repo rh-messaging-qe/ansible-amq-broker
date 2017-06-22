@@ -12,7 +12,7 @@ env:
 before_install:
   - deactivate
   - sudo apt-get update -qq
-  - sudo apt-get install -y -o Dpkg::Options::="--force-confnew" docker-engine
+  - sudo apt-get install -y -o Dpkg::Options::="--force-confnew" docker-ce
 
 install:
   - sudo pip install docker-py
