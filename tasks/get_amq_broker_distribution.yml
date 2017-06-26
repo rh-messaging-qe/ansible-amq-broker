@@ -37,7 +37,7 @@
 
 - name: Create link to broker install dir {{ amq_broker_install_dest }}/{{ amq_broker_install_link }}
   file:
-    src: "{{ amq_broker_install_dest }}/{{ amq_broker_download_url | basename | regex_replace('-bin.zip$', '')}}"
+    src: "{{ amq_broker_install_dest }}/{{ amq_broker_download_url | basename | regex_replace('^(?P<brand>.+)-(?P<product>.+)-(?P<version>[0-9].[0-9].[0-9]).*', '\\g<brand>-\\g<product>-\\g<version>') }}"
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}"
     state: link
     mode: 0755
