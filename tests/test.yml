@@ -29,7 +29,7 @@
   hosts: docker_containers
   remote_user: root
   roles:
-    - role: basic-server
+    - role: ansible-basic-server
 
 - name: test with queues
   hosts: docker_containers
@@ -47,7 +47,7 @@
       - test.queue1
       - test.queue2
   roles:
-    - amq-broker
+    - ansible-amq-broker
 
 - name: test without queues
   hosts: docker_containers
@@ -67,7 +67,7 @@
       - test.queue1
       - test.queue2
   roles:
-    - amq-broker
+    - ansible-amq-broker
 
 - name: test without force
   hosts: docker_containers
@@ -85,7 +85,7 @@
     amq_broker_instance_jmx_port: 1099
     amq_broker_instance_create_force: false
   roles:
-    - amq-broker
+    - ansible-amq-broker
 
 - name: test without require login
   hosts: docker_containers
@@ -103,13 +103,13 @@
     amq_broker_instance_jmx_port: 1099
     amq_broker_instance_create_require_login: false
   roles:
-    - amq-broker
+    - ansible-amq-broker
 
 - name: test install with the defaults
   hosts: docker_containers
   remote_user: root
   roles:
-    - amq-broker
+    - ansible-amq-broker
 
 - name: test install with clustering defaults
   hosts: docker_containers
@@ -117,4 +117,4 @@
   vars:
     amq_broker_instance_clustered: true
   roles:
-    - amq-broker
+    - ansible-amq-broker

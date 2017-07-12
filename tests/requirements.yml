@@ -4,4 +4,4 @@
 
 - src: https://github.com/msgqe/basic-server.git
   scm: git
-  name: basic-server
+  name: ansible-basic-server

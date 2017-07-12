@@ -135,7 +135,7 @@ Including an example of how to use your role (for instance, with variables passe
 			amq_broker_instance_dir: jboss-amq-7-i0
 			amq_broker_instance_jmx_port: 1099
 		roles:
-			- amq-broker
+			- ansible-amq-broker
 
 
 Testing
