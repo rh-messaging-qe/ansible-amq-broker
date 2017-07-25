@@ -25,7 +25,7 @@
   register: dist_get
 
 - name: Create JBoss AMQ 7 Broker user
-  shell: id {{ amq_broker_user }} || (useradd -m -U {{ amq_broker_user }} )
+  shell: id {{ amq_broker_user }} || (useradd -u {{ amq_broker_user_uid }} -m -U {{ amq_broker_user }}  )
 
 - name: Unzip downloaded distribution to {{ amq_broker_install_dest }}
   unarchive:
