@@ -73,6 +73,8 @@ Role Variables: Ports
 
 Variables controlling which ports are used for the messaging services.
 
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
 | `amq_broker_default_port`  | 61616 | Default broker port |
 | `amq_broker_default_amqp`  | 5672  | Default AMQP broker port |
 | `amq_broker_default_stomp` | 61613 | Default STOMP broker port |
