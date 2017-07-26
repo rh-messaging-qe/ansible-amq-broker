@@ -45,6 +45,9 @@ amq_broker_jvm: java-1.8.0-openjdk-devel
 # The system user used to run the broker instance
 amq_broker_user: jamq
 
+# The system user uid to use when user is creating
+amq_broker_user_uid: 5672
+
 # Journal type for the broker instance
 amq_broker_instance_journal_type: nio
 amq_broker_instance_dir: jboss-amq-7-i0

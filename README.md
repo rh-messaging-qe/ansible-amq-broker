@@ -39,6 +39,7 @@ Variables controlling broker installation parameters.
 | `amq_broker_download_dest` | `/tmp` | Download destination |
 | `amq_broker_install_dest` | `/home/{{ amq_broker_user }}` | Install destination |
 | `amq_broker_user` | jamq | System user to create for running JBoss AMQ 7 Broker |
+| `amq_broker_user_uid` | 5672 | System user uid to create for running JBoss AMQ 7 Broker |
 | `amq_broker_install_link` | jboss-amq-7 | Friendly link name for the installation dir |
 | `amq_broker_download_url` | {{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') }} | Download URL (must be a zip file) |
 | `amq_broker_jvm_install` | true | Whether to install a Java JVM. |
