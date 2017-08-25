@@ -31,6 +31,11 @@
   roles:
     - role: ansible-basic-server
 
+- name: Get all facts about machines
+  hosts: all
+  gather_facts: True
+  tasks: []
+
 - name: test with queues
   hosts: docker_containers
   remote_user: root
