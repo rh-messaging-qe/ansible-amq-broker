@@ -44,6 +44,8 @@ Variables controlling broker installation parameters.
 | `amq_broker_download_url` | {{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') }} | Download URL (must be a zip file) |
 | `amq_broker_jvm_install` | true | Whether to install a Java JVM. |
 | `amq_broker_jvm` | java-1.8.0-openjdk-devel | The Java JVM to install. |
+| `amq_broker_default_facts_file` | `/etc/ansible/facts.d/amq_broker.fact` | Generate broker related information to this file. |
+
 
 
 Role Variables: Instance Variables

@@ -27,12 +27,15 @@ amq_broker_skip_create: false
 # Whether to skip configuration step for a broker
 amq_broker_skip_configure: false
 
+# Path to locally generated facts about amq broker [/etc/ansible/facts.d/]
+amq_broker_default_facts_file: /etc/ansible/facts.d/amq_broker.fact
+
 # Whether to start broker as a service
 amq_broker_start_server: true
 amq_broker_service_start: true
 amq_broker_force_kill: false
 
-amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') }}"
+amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('http://www.apache.org/dist/activemq/activemq-artemis/2.2.0/apache-artemis-2.2.0-bin.zip', true) }}"
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user }}
 amq_broker_install_link: jboss-amq-7

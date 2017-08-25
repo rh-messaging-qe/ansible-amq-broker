@@ -1,0 +1,40 @@
+[broker]
+broker_home={{ amq_broker_install_dest }}/{{ amq_broker_install_link }}
+broker_instance={{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}
+{# TODO missing broker_logs={{ amq_broker_logs }} #}
+
+[broker_ports]
+broker_port_jmx={{ amq_broker_instance_jmx_port }}
+broker_port_main={{ amq_broker_default_port }}
+broker_port_amqp={{ amq_broker_default_amqp }}
+broker_port_mqtt={{ amq_broker_default_mqtt }}
+broker_port_core={{ amq_broker_default_core }}
+broker_port_openwire={{ amq_broker_default_port }}
+broker_port_stomp={{ amq_broker_default_stomp }}
+
+[users]
+broker_user={{ amq_broker_user }}
+{# add more users here
+admin=admin
+lala=12345 #}
+
+[topology]
+{% if amq_broker_instance_clustered == false %}
+single_broker=true
+clustered=false
+{% else %}
+single_broker=false
+clustered=true
+{% endif %}
+type={{ playbook_dir }}
+
+[node]
+this_node={{ inventory_hostname }},{{ ansible_host }}
+groups_member={{ group_names | join(",") }}
+
+[groups]
+related_nodes={{ groups.all | join(",") }}
+{% for host in groups.all %}
+{{ host }}_ipv4={{ hostvars[host]['ansible_all_ipv4_addresses'] }}
+{{ host }}_ipv6={{ hostvars[host]['ansible_all_ipv6_addresses'] }}
+{% endfor %}
