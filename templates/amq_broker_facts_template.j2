@@ -35,5 +35,6 @@ groups_member={{ group_names | join(",") }}
 [groups]
 related_nodes={{ groups.all | join(",") }}
 {% for host in groups.all %}
-{{ host }}={{ hostvars[host]['ansible_host'] }}
+{{ host }}_ipv4={{ hostvars[host]['ansible_all_ipv4_addresses'] }}
+{{ host }}_ipv6={{ hostvars[host]['ansible_all_ipv6_addresses'] }}
 {% endfor %}
