@@ -27,6 +27,10 @@ amq_broker_skip_create: false
 # Whether to skip configuration step for a broker
 amq_broker_skip_configure: false
 
+# Whether to dump system facts to a file. To be used when integrated with
+# test automation tools that may need to inspect deployment details
+amq_broker_write_amq_facts: false
+
 # Path to locally generated facts about amq broker [/etc/ansible/facts.d/]
 amq_broker_default_facts_file: /etc/ansible/facts.d/amq_broker.fact
 

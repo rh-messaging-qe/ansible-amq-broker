@@ -28,6 +28,10 @@ Variables controlling what will be executed by the role.
 | `amq_broker_force_kill` | false | Whether to allow kill broker or not. |
 | `amq_broker_skip_iptables` | false | Whether to skip setting firewall for broker. |
 | `amq_broker_perform_teardown` | false | Whether to perform tear down actions or not (close ports, clean environment, etc). |
+| `amq_broker_write_amq_facts` | false | Whether to dump system facts to a file (used to integrate this role in some test automation tools). |
+
+**Note**: amq_broker_write_amq_facts is disabled by default because it's broken. It's part of a larger requirement that is still in development.
+Users are advised to not use it at the moment.
 
 Role Variables: Installation Variables
 --------------

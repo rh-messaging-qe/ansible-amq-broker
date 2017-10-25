@@ -38,4 +38,5 @@
   when: amq_broker_skip_iptables is defined and amq_broker_skip_iptables != true and amq_broker_perform_teardown is defined and amq_broker_perform_teardown == true
 
 - name: Write deployment configuration to facts
+  when: amq_broker_write_amq_facts is defined and amq_broker_write_amq_facts == true
   include: write_amq_facts.yml
