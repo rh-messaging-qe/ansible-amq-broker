@@ -13,6 +13,10 @@
 # limitations under the License.
 ---
 # Open broker ports
+- name: Ensure iptables is installed
+  when:
+  package: name=iptables state=present
+
 - name: Open broker ports
   vars:
     iptables_packet_policy: ACCEPT # {DROP, REJECT}
