@@ -150,6 +150,8 @@ To test this role you need docker. If your system has docker, this role can be t
 
 ```make test```
 
+**Note**: you need to install python2-docker for the test to run.
+
 License
 -------
 
