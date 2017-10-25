@@ -60,7 +60,7 @@ Variables controlling the creation of a broker instance.
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
 | `amq_broker_instance_name` | amq | The instance name |
-| `amq_broker_instance_journal_type` | nio | The type of the journal (aio or nio) |
+| `amq_broker_instance_journal_type` | nio | The type of the journal (aio, nio or disabled) |
 | `amq_broker_instance_create_force` | true | Whether to force instance creation (this does not create fresh broker instance) |
 | `amq_broker_instance_role` | amq | The role |
 | `amq_broker_instance_user` | admin | The instance user |

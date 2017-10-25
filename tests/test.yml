@@ -111,6 +111,14 @@
   roles:
     - ansible-amq-broker
 
+- name: test install with persistence disabled
+  hosts: docker_containers
+  remote_user: root
+  vars:
+    amq_broker_instance_journal_type: disabled
+  roles:
+    - ansible-amq-broker
+
 - name: test install with clustering defaults
   hosts: docker_containers
   remote_user: root
