@@ -38,6 +38,9 @@
   register: dist_unzipped
   when: dist_get.changed
 
+- name: Ensure correct ownership
+  shell: chown -R "{{ amq_broker_user }}":"{{ amq_broker_user }}" {{ amq_broker_install_dest }}
+
 - name: Create link to broker install dir {{ amq_broker_install_dest }}/{{ amq_broker_install_link }}
   file:
     src: "{{ amq_broker_install_dest }}/{{ amq_broker_download_url | basename | regex_replace('^(?P<brand>.+)-(?P<product>.+)-(?P<version>[0-9].[0-9].[0-9]).*', '\\g<brand>-\\g<product>-\\g<version>') }}"
