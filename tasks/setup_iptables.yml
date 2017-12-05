@@ -30,3 +30,6 @@
     - "{{ amq_broker_core_port | default(amq_broker_default_core)}}"
     - "{{ amq_broker_stomp_port | default(amq_broker_default_stomp)}}"
     - "{{ amq_broker_jmx_port | default(amq_broker_instance_jmx_port)}}"
+    - "{{ amq_broker_admin_port | default(amq_broker_default_admin_port) }}"
+    - "{{ amq_broker_cluster_port | default(amq_broker_default_cluster_port) }}"
+    - "{{ amq_broker_cluster_netty_connector_port | default(amq_broker_cluster_netty_connector_port)}}"

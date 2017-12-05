@@ -74,6 +74,9 @@ amq_broker_default_amqp: 5672
 amq_broker_default_stomp: 61613
 amq_broker_default_mqtt: 1883
 amq_broker_default_core: 5445
+amq_broker_default_admin_port: 8161
+amq_broker_default_cluster_port: 9876
+amq_broker_default_cluster_netty_connector_port: 61617
 
 # TODO not used much
 #amq_broker_main_port
@@ -87,8 +90,8 @@ amq_broker_instance_type: default
 
 amq_broker_cluster_broadcast_group_name: my-broadcast-group
 amq_broker_cluster_broadcast_group_address: 231.7.7.7
-amq_broker_cluster_broadcast_group_port: 9876
-amq_broker_cluster_netty_connector_port: 61617
+amq_broker_cluster_broadcast_group_port: {{ amq_broker_default_cluster_port }}
+amq_broker_cluster_netty_connector_port: {{ amq_broker_default_cluster_netty_connector_port }}
 amq_broker_cluster_broadcast_period: 2000
 amq_broker_cluster_balancing: ON_DEMAND
 amq_broker_cluster_max_hops: 1
