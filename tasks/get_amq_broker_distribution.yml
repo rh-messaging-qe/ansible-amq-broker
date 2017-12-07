@@ -21,6 +21,9 @@
     msg: "Going to download & use broker from {{ amq_broker_download_url }}"
 
 - name: Download distribution once to local dir to spread among nodes
+  tags:
+    - broker
+    - download
   get_url:
     url: "{{ amq_broker_download_url }}"
     dest: "{{ amq_broker_download_dest }}/{{ amq_broker_download_url | basename}}"
@@ -28,6 +31,9 @@
   register: dist_get
 
 - name: Create JBoss AMQ 7 Broker user
+  tags:
+    - broker
+    - user
   shell: id {{ amq_broker_user }} || (useradd -u {{ amq_broker_user_uid }} -m -U {{ amq_broker_user }}  )
 
 - name: Unzip downloaded distribution to {{ amq_broker_install_dest }}
@@ -39,6 +45,9 @@
   when: dist_get.changed
 
 - name: Ensure correct ownership
+  tags:
+    - broker
+    - ownership
   shell: chown -R "{{ amq_broker_user }}":"{{ amq_broker_user }}" {{ amq_broker_install_dest }}
 
 - name: Create link to broker install dir {{ amq_broker_install_dest }}/{{ amq_broker_install_link }}
