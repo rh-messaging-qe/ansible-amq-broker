@@ -12,6 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ---
+- name: Configure Jolokia access for JBoss AMQ 7 Broker instance
+  template:
+    src: templates/jolokia-access.xml.j2
+    dest: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/etc/jolokia-access.xml"
+    owner: "{{ amq_broker_user }}"
+    group: "{{ amq_broker_user }}"
+    mode: 0755
+  notify: "Restart JBoss AMQ 7 Broker default instance via service"
+
 - name: Configure JBoss AMQ 7 Broker instance
   when: amq_broker_instance_type is defined and amq_broker_instance_type != "default"
   template:

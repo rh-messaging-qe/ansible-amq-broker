@@ -89,6 +89,17 @@ Variables controlling which ports are used for the messaging services.
 | `amq_broker_default_core`  | 5445  | Default Core broker port |
 
 
+
+
+Role Variables: Jolokia
+--------------
+
+Variables controlling the configuration of a broker instance.
+
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
+| `amq_broker_jolokia_allow_origin` | *://0.0.0.0* | Cross-origin access settings for the management console |
+
 Role Variables: Configuration Variables
 --------------
 
