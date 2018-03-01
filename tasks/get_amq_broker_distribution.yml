@@ -47,7 +47,7 @@
     list_files: yes
   register: archive_contents
 
-- debug: msg="Latest directory created is {{ archive_contents.files[0] | dirname }}"
+- debug: msg="Latest directory created is {{ archive_contents.files[0].split('/') | first }}"
   tags:
   - broker
   - link
@@ -57,7 +57,7 @@
     - broker
     - link
   file:
-    src: "{{ amq_broker_install_dest }}/{{ archive_contents.files[0] | dirname }}"
+    src: "{{ amq_broker_install_dest }}/{{ archive_contents.files[0].split('/') | first }}"
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}"
     state: link
     mode: 0755
