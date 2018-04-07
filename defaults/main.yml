@@ -67,7 +67,7 @@ amq_broker_instance_password: admin
 # This variable defaults to undefined
 # amq_broker_instance_broker_host:
 amq_broker_instance_web_host: 0.0.0.0
-amq_broker_instance_rmi_host: 0.0.0.0
+amq_broker_instance_rmi_host: "{{ ansible_nodename }}"
 
 amq_broker_default_port: 61616
 amq_broker_default_amqp: 5672
