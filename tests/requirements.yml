@@ -2,6 +2,3 @@
   scm: git
   name: provision_docker
 
-- src: https://github.com/msgqe/basic-server.git
-  scm: git
-  name: ansible-basic-server
