@@ -25,12 +25,6 @@
       provision_docker_inventory: "{{ inventory }}"
       provision_docker_privileged: true
 
-- name: provision the containers
-  hosts: docker_containers
-  remote_user: root
-  roles:
-    - role: ansible-basic-server
-
 - name: test with queues
   hosts: docker_containers
   remote_user: root
