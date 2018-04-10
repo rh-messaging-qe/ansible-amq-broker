@@ -21,8 +21,12 @@ install:
   - sudo apt-get update -qq
   - sudo apt-get install -y ansible
   - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
+  - git clone https://github.com/msgqe/ansible-basic-server
+  - cd ansible-basic-server
+  - ansible-galaxy install -f -r requirements.yml
+  - make test
 
 script:
   # Upstream Artemis works just as fine for this test
-  - export AMQ_BROKER_DOWNLOAD_URL=http://www.apache.org/dist/activemq/activemq-artemis/2.3.0/apache-artemis-2.3.0-bin.zip
+  - export AMQ_BROKER_DOWNLOAD_URL=http://www.apache.org/dist/activemq/activemq-artemis/2.5.0/apache-artemis-2.5.0-bin.zip
   - make test
