@@ -25,6 +25,7 @@
     - broker
     - download
   get_url:
+    validate_certs: "{{ amq_broker_validate_certs}} "
     url: "{{ amq_broker_download_url }}"
     dest: "{{ amq_broker_download_dest }}/{{ amq_broker_download_url | basename}}"
     force: no

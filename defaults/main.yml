@@ -43,6 +43,7 @@ amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user }}
 amq_broker_install_link: jboss-amq-7
+amq_broker_validate_certs: no
 
 
 # Whether to install Java JVM and which one to install
