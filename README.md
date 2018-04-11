@@ -136,7 +136,11 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 Dependencies
 ------------
 
-A Java JVM must be present in the system if `amq_broker_jvm_install` is false.
+* A Java JVM must be present in the system if `amq_broker_jvm_install` is false.
+* For RHEL/CentOS 6 due to dependency of `ansible-xml` module, you have to install following packages
+```yum install -y libxml2-devel libxslt-devel``` and upgrade python-lxml, because we need at least 2.3.0+: ```pip install --upgrade lxml``` This works even for deprecated python 2.6.
+
+
 
 Example Playbook
 ----------------
