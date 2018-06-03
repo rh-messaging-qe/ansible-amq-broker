@@ -39,7 +39,7 @@ amq_broker_start_server: true
 amq_broker_service_start: true
 amq_broker_force_kill: false
 
-amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('http://www.apache.org/dist/activemq/activemq-artemis/2.3.0/apache-artemis-2.3.0-bin.zip', true) }}"
+amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('https://archive.apache.org/dist/activemq/activemq-artemis/2.6.0/apache-artemis-2.6.0-bin.zip', true) }}"
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user }}
 amq_broker_install_link: jboss-amq-7
