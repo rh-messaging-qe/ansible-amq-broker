@@ -39,6 +39,12 @@ amq_broker_start_server: true
 amq_broker_service_start: true
 amq_broker_force_kill: false
 
+# The system user used to run the broker instance
+amq_broker_user: jamq
+
+# The system user uid to use when user is creating
+amq_broker_user_uid: 5672
+
 amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('https://archive.apache.org/dist/activemq/activemq-artemis/2.6.0/apache-artemis-2.6.0-bin.zip', true) }}"
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user }}
@@ -49,12 +55,6 @@ amq_broker_validate_certs: no
 # Whether to install Java JVM and which one to install
 amq_broker_jvm_install: true
 amq_broker_jvm: java-1.8.0-openjdk-devel
-
-# The system user used to run the broker instance
-amq_broker_user: jamq
-
-# The system user uid to use when user is creating
-amq_broker_user_uid: 5672
 
 # Journal type for the broker instance
 amq_broker_instance_journal_type: nio
