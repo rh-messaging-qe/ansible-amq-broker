@@ -15,6 +15,6 @@
 - name: Kill JBoss AMQ 7 Broker default instance
   when: amq_broker_service_start is defined and amq_broker_service_start == true
   become: true
-  become_user: "{{ amq_broker_user }}"
+  become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
   command: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service force-stop"
   register: force_stop

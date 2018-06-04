@@ -35,7 +35,7 @@
   tags:
     - broker
     - user
-  shell: id {{ amq_broker_user }} || (useradd -u {{ amq_broker_user_uid }} -m -U {{ amq_broker_user }}  )
+  shell: id {{ amq_broker_user | default(amq_broker_default_user) }} || (useradd -u {{ amq_broker_user_uid }} -m -U {{ amq_broker_user | default(amq_broker_default_user) }}  )
 
 - name: Unzip downloaded distribution to {{ amq_broker_install_dest }}
   tags:
@@ -62,14 +62,12 @@
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}"
     state: link
     mode: 0755
-    owner: "{{ amq_broker_user }}"
-    group: "{{ amq_broker_user }}"
+    owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
     force: true
 
 - name: Ensure correct ownership
   tags:
     - broker
     - ownership
-  shell: chown -R "{{ amq_broker_user }}":"{{ amq_broker_user }}" {{ amq_broker_install_dest }}
-
-
+  shell: chown -R "{{ amq_broker_user | default(amq_broker_default_user) }}":"{{ amq_broker_user | default(amq_broker_default_user) }}" {{ amq_broker_install_dest }}

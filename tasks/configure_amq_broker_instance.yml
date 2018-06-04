@@ -16,8 +16,8 @@
   template:
     src: templates/jolokia-access.xml.j2
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/etc/jolokia-access.xml"
-    owner: "{{ amq_broker_user }}"
-    group: "{{ amq_broker_user }}"
+    owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
     mode: 0755
   notify: "Restart JBoss AMQ 7 Broker default instance via service"
 
@@ -26,8 +26,8 @@
   template:
     src: templates/{{ amq_broker_instance_type }}/broker.xml.j2
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/etc/broker.xml"
-    owner: "{{ amq_broker_user }}"
-    group: "{{ amq_broker_user }}"
+    owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
     mode: 0755
   notify: "Restart JBoss AMQ 7 Broker default instance via service"
 
@@ -36,7 +36,7 @@
   template:
     src: templates/{{ amq_broker_instance_type }}/jgroups_default.xml
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/etc/jgroups_default.xml"
-    owner: "{{ amq_broker_user }}"
-    group: "{{ amq_broker_user }}"
+    owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
     mode: 0755
   notify: "Restart JBoss AMQ 7 Broker default instance via service"

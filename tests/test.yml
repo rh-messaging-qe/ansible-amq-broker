@@ -30,7 +30,7 @@
   remote_user: root
   vars:
     amq_broker_download_dest: /tmp
-    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_install_dest: /home/{{ amq_broker_user | default(amq_broker_default_user) }}
     amq_broker_user: jamq
     amq_broker_install_link: jboss-amq-7
     amq_broker_jvm: java-1.8.0-openjdk-devel
@@ -50,7 +50,7 @@
     # Skip the install part (which takes a long time)
     amq_broker_skip_install: true
     amq_broker_download_dest: /tmp
-    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_install_dest: /home/{{ amq_broker_user | default(amq_broker_default_user) }}
     amq_broker_user: jamq
     amq_broker_install_link: jboss-amq-7
     amq_broker_jvm: java-1.8.0-openjdk-devel
@@ -70,7 +70,7 @@
     # Skip the install part (which takes a long time)
     amq_broker_skip_install: true
     amq_broker_download_dest: /tmp
-    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_install_dest: /home/{{ amq_broker_user | default(amq_broker_default_user) }}
     amq_broker_user: jamq
     amq_broker_install_link: jboss-amq-7
     amq_broker_jvm: java-1.8.0-openjdk-devel
@@ -88,7 +88,7 @@
     # Skip the install part (which takes a long time)
     amq_broker_skip_install: true
     amq_broker_download_dest: /tmp
-    amq_broker_install_dest: /home/{{ amq_broker_user }}
+    amq_broker_install_dest: /home/{{ amq_broker_user | default(amq_broker_default_user) }}
     amq_broker_user: jamq
     amq_broker_install_link: jboss-amq-7
     amq_broker_jvm: java-1.8.0-openjdk-devel
