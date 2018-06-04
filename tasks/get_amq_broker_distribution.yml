@@ -53,13 +53,13 @@
   - broker
   - link
 
-- name: Create link to broker install dir {{ amq_broker_download_dest }}/{{ amq_broker_install_link }}
+- name: Create link to broker install dir {{ amq_broker_download_dest }}/{{ amq_broker_install_link | default(amq_broker_default_install_link) }}
   tags:
     - broker
     - link
   file:
     src: "{{ amq_broker_install_dest }}/{{ archive_contents.files[0].split('/') | first }}"
-    dest: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}"
+    dest: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link | default(amq_broker_default_install_link) }}"
     state: link
     mode: 0755
     owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"

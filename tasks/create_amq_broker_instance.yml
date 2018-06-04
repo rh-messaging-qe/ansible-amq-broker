@@ -40,5 +40,5 @@
   become: true
   become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
   args:
-    chdir: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link }}/bin"
+    chdir: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link | default(amq_broker_default_install_link) }}/bin"
   notify: "Start JBoss AMQ 7 Broker default instance via service"
