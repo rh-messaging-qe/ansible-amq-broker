@@ -58,7 +58,8 @@ amq_broker_jvm: java-1.8.0-openjdk-devel
 
 # Journal type for the broker instance
 amq_broker_instance_journal_type: nio
-amq_broker_instance_journal_type_args: "{% if amq_broker_instance_journal_type == 'nio' or amq_broker_instance_journal_type == 'aio' %} --{{ amq_broker_instance_journal_type }} {% elif amq_broker_instance_journal_type == 'disabled' %} --disable-persistence {% endif %}"
+amq_broker_instance_journal_nio_fsync: false
+amq_broker_instance_journal_type_args: "{% if amq_broker_instance_journal_type == 'nio' or amq_broker_instance_journal_type == 'aio' %} --{{ amq_broker_instance_journal_type }} {% elif amq_broker_instance_journal_type == 'disabled' %} --disable-persistence {% endif %} {% if amq_broker_instance_journal_nio_fsync == true %} --no-fsync {% endif %}"
 amq_broker_instance_dir: jboss-amq-7-i0
 amq_broker_instance_name: amq
 amq_broker_instance_role: amq
