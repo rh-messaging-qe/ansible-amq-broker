@@ -138,7 +138,7 @@ Dependencies
 
 * A Java JVM must be present in the system if `amq_broker_jvm_install` is false.
 * For RHEL/CentOS 6 due to dependency of `ansible-xml` module, you have to install following packages
-```yum install -y libxml2-devel libxslt-devel``` and upgrade python-lxml, because we need at least 2.3.0+: ```pip install --upgrade lxml``` This works even for deprecated python 2.6.
+```yum install -y libxml2-devel libxslt-devel``` and upgrade python-lxml, because we need at least 2.5.0+: ```pip install --upgrade lxml``` This works even for deprecated python 2.6.
 
 
 
