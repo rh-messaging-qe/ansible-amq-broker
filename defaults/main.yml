@@ -45,7 +45,7 @@ amq_broker_default_user: jamq
 # The system user uid to use when user is creating
 amq_broker_user_uid: 5672
 
-amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('https://archive.apache.org/dist/activemq/activemq-artemis/2.6.1/apache-artemis-2.6.1-bin.zip', true) }}"
+amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('https://archive.apache.org/dist/activemq/activemq-artemis/2.6.2/apache-artemis-2.6.2-bin.zip', true) }}"
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user | default(amq_broker_default_user) }}
 amq_broker_default_install_link: jboss-amq-7
