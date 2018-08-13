@@ -17,3 +17,9 @@
     src: templates/amq_broker_facts_template.j2
     dest: "{{ amq_broker_default_facts_file }}"
     mode: 0644
+
+- name: Copy (fetch) generated file with details to master host node
+  fetch:
+    src: "{{ amq_broker_default_facts_file }}"
+    dest: /tmp/facts/amq_broker_facts_{{ ansible_default_ipv4.address }}.yaml
+    flat: yes
