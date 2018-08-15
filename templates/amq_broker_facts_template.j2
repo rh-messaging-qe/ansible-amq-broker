@@ -2,6 +2,7 @@
 broker_home: {{ amq_broker_install_dest }}/{{ amq_broker_install_link | default(amq_broker_default_install_link) }}
 broker_instance: {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}
 broker_name: {{ amq_broker_instance_name }}
+allow_origins: '*'
 {% if amq_broker_instance_clustered == false %}
 single_broker:true
 clustered:false
