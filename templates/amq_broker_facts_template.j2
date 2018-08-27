@@ -4,8 +4,8 @@ broker_instance: {{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}
 broker_name: {{ amq_broker_instance_name }}
 allow_origins: '*'
 {% if amq_broker_instance_clustered == false %}
-single_broker:true
-clustered:false
+single_broker: true
+clustered: false
 {% else %}
 single_broker: false
 clustered: true
