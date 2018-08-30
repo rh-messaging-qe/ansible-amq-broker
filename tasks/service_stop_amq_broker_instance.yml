@@ -20,20 +20,24 @@
   when:
     - amq_broker_service_start is defined and amq_broker_service_start == true
     - amq_broker_path_st.stat.exists and amq_broker_path_st.stat.isdir is defined
-  become: true
-  become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
-  command: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service stop"
-  register: stop_result
+  block:
+    - name: Stop broker instance via service
+      become: true
+      become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+      command: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis-service stop"
+  rescue:
+    - name: Kill JBoss AMQ 7 Broker
+      include: kill_amq_broker_instance.yml
 
 - name: Stop JBoss AMQ 7 Broker default instance
   when:
     - amq_broker_service_start is defined and amq_broker_service_start == false
     - amq_broker_path_st.stat.exists and amq_broker_path_st.stat.isdir is defined
-  become: true
-  become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
-  command: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis stop"
-  register: stop_result
-
-- name: Kill JBoss AMQ 7 Broker
-  when: stop_result | failed and amq_broker_force_kill is defined and amq_broker_force_kill == true
-  include: kill_amq_broker_instance.yml
+  block:
+    - name: Stop broker instance
+      become: true
+      become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+      command: "{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}/bin/artemis stop"
+  rescue:
+    - name: Kill JBoss AMQ 7 Broker
+      include: kill_amq_broker_instance.yml
