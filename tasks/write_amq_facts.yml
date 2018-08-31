@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+- name: Create facts dir if needed
+  file:
+    path: "{{ amq_broker_default_facts_file | dirname }}"
+    state: directory
+    recurse: yes
+
 - name: Write local amq broker facts
   template:
     src: templates/amq_broker_facts_template.j2
@@ -27,11 +33,11 @@
 - name: Copy (fetch) generated file with details to master host node
   fetch:
     src: "{{ amq_broker_default_facts_file }}"
-    dest: /tmp/facts/amq_broker_facts_{{ ansible_default_ipv4.address }}.yaml
+    dest: "{{ amq_broker_local_facts_dir }}/amq_broker_facts_{{ ansible_default_ipv4.address }}.yaml"
     flat: yes
 
 - name: Copy (fetch) generated node information file host node
   fetch:
     src: "{{ amq_broker_node_info_file }}"
-    dest: /tmp/facts/node_information_{{ ansible_default_ipv4.address }}.yaml
+    dest: "{{ amq_broker_local_facts_dir }}/node_information_{{ ansible_default_ipv4.address }}.yaml"
     flat: yes
