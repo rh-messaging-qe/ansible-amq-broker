@@ -60,6 +60,11 @@
   include: teardown_iptables.yml
   when: amq_broker_skip_iptables is defined and amq_broker_skip_iptables != true and amq_broker_perform_teardown is defined and amq_broker_perform_teardown == true
 
+- name: Define host type (master|slave)
+  when: amq_broker_instance_ha is defined and amq_broker_instance_ha == true
+  set_fact:
+    host_type: "{{ hostvars[inventory_hostname].group_names | select('match','master|slave') | list | first }}"
+
 - name: Write deployment configuration to facts
   tags:
     - broker

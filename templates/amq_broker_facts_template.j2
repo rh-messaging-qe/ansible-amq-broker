@@ -16,14 +16,13 @@ cluster_connector_address: {{ ansible_default_ipv4.address }}
 {% endif %}
 
 {% if amq_broker_instance_ha == true %}
-
 group_name: {{ amq_broker_instance_ha_group_name }}
 vote_on_replication_failure: {{ amq_broker_instance_ha_vote_on_replication_failure }}
-  {% if host_type == 'master' %}
+{% if host_type == 'master' %}
 ha_role: master
 check_for_live_server: {{ amq_broker_instance_ha_master_check_for_live_server }}
-  {% elif host_type == 'slave' %}
+{% elif host_type == 'slave' %}
 ha_role: slave
 allow_failback: {{ amq_broker_instance_ha_slave_allow_failback }}
-  {% endif %}
 {% endif %}
+{%- endif %}
