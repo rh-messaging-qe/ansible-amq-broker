@@ -41,3 +41,18 @@
   rescue:
     - name: Kill JBoss AMQ 7 Broker
       include: kill_amq_broker_instance.yml
+
+- name: Make sure no Artemis/AMQ 7 broker is running on machine
+  when: amq_broker_force_kill is defined and amq_broker_force_kill == true
+  block:
+    - name: Check running artemis process
+      command: 'pgrep -f "java.*artemis"'
+      register: bad_artemis_pid
+      msg: "Bad artemis= {{ bad_artemis_pid }}"
+      failed_when: bad_artemis_pid.rc == 0
+  rescue:
+    - name: SIGKILL any artemis java process
+      become: true
+      become_user: root
+      command: 'pkill -9 -f "java.*artemis"'
+      ignore_errors: true
