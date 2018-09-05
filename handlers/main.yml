@@ -41,6 +41,6 @@
   listen: "restart amq broker service"
 
 - name: Kill application with SIGKILL
-  when: force_stop_status.rc != 0
+  when: force_stop.rc != 0
   command: "kill $(pgrep -u {{ amq_broker_user | default(amq_broker_default_user) }} java)"
   become: yes
