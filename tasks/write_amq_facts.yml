@@ -33,11 +33,11 @@
 - name: Copy (fetch) generated file with details to master host node
   fetch:
     src: "{{ amq_broker_default_facts_file }}"
-    dest: "{{ amq_broker_local_facts_dir }}/amq_broker_facts_{{ ansible_default_ipv4.address }}.yaml"
+    dest: "{{ amq_broker_local_facts_dir }}/amq_broker_facts_{{ external_address | default(ansible_default_ipv4.address) }}.yaml"
     flat: yes
 
 - name: Copy (fetch) generated node information file host node
   fetch:
     src: "{{ amq_broker_node_info_file }}"
-    dest: "{{ amq_broker_local_facts_dir }}/node_information_{{ ansible_default_ipv4.address }}.yaml"
+    dest: "{{ amq_broker_local_facts_dir }}/node_information_{{ external_address | default(ansible_default_ipv4.address) }}.yaml"
     flat: yes
