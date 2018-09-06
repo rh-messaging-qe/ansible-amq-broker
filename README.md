@@ -134,6 +134,16 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 | `amq_broker_cluster_replicated` | false | Set cluster to Replication mode |
 | `amq_broker_cluster_sharedstore` | false | Set cluster to Shared store mode |
 
+Supported Inventory: Host Variables
+------------
+
+Variables which are defined in inventory file specific for given host
+
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
+| `external_address` | Not used by default | Useful if broker is running on internal network, but is VM is accessed from outside of this network |
+
+
 Dependencies
 ------------
 

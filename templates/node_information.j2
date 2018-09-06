@@ -1,4 +1,7 @@
 node_information:
-  default_address: {{ ansible_default_ipv4.address }}
+  default_address: {{ external_address | default(ansible_default_ipv4.address) }}
   addresses:
-    default_ssh: {{ ansible_default_ipv4.address }}
+    default_ssh: {{ external_address | default(ansible_default_ipv4.address) }}
+    {% if external_address is defined -%}
+    internal: {{ ansible_default_ipv4.address }}
+    {% endif -%}
