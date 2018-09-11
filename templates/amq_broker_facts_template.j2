@@ -15,6 +15,12 @@ cluster_multicast_port: {{ amq_broker_cluster_broadcast_group_port }}
 cluster_connector_address: {{ ansible_default_ipv4.address }}
 {% endif %}
 
+{%- if amq_broker_shared_store_dir is defined and amq_broker_shared_store_dir -%}
+fs_paging_directory: {{ amq_broker_shared_store_dir }}/data/paging
+fs_bindings_directory: {{ amq_broker_shared_store_dir }}/data/bindings
+fs_large_messages_directory: {{ amq_broker_shared_store_dir }}/data/large-messages
+{% endif -%}
+
 {% if amq_broker_instance_ha == true %}
 group_name: {{ amq_broker_instance_ha_group_name }}
 vote_on_replication_failure: {{ amq_broker_instance_ha_vote_on_replication_failure }}

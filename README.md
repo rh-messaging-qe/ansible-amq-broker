@@ -133,6 +133,7 @@ Variables controlling cluster parameters (for amq_broker_instance_type = default
 | `amq_broker_cluster_max_hops` | 1 | Cluster max hopes (use for CHAIN or SYMETRIC clustering) |
 | `amq_broker_cluster_replicated` | false | Set cluster to Replication mode |
 | `amq_broker_cluster_sharedstore` | false | Set cluster to Shared store mode |
+| `amq_broker_shared_store_dir` | None | Set root directory of shared store |
 
 Supported Inventory: Host Variables
 ------------
