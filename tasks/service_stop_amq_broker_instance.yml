@@ -47,12 +47,25 @@
   block:
     - name: Check running artemis process
       command: 'pgrep -f "java.*artemis"'
-      register: bad_artemis_pid
-      msg: "Bad artemis= {{ bad_artemis_pid }}"
-      failed_when: bad_artemis_pid.rc == 0
+      register: unknown_artemis_pid
+      msg: "Unknown artemis running with pid= {{ unknown_artemis_pid }}"
+      failed_when: unknown_artemis_pid.rc == 0
   rescue:
-    - name: SIGKILL any artemis java process
+    - name: SIGKILL any artemis java process by {{ amq_broker_user }}
+      when: amq_broker_kill_all == false
+      become: true
+      become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+      command: 'pkill -9 -u {{ amq_broker_user | default(amq_broker_default_user) }} -f "java.*artemis"'
+      register: kill_return
+      ignore_errors: true
+
+    - name: SIGKILL any artemis java process as root
+      when: amq_broker_kill_all == true
       become: true
       become_user: root
       command: 'pkill -9 -f "java.*artemis"'
       ignore_errors: true
+
+- name: Print unknown brokers warning
+  when: kill_return.rc != 0
+  debug: msg="Warning, we have some previously running brokers on this node!"
