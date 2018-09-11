@@ -76,6 +76,7 @@
   when:
     - amq_broker_db_driver_url is defined and amq_broker_db_driver_url
   get_url:
+    validate_certs: "{{ amq_broker_validate_certs}}"
     url: "{{ amq_broker_db_driver_url }}"
     dest: "{{ amq_broker_install_dest }}/{{ amq_broker_install_link | default(amq_broker_default_install_link) }}/lib"
     force: no
