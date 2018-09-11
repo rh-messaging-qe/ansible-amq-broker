@@ -40,6 +40,7 @@ amq_broker_local_facts_dir: "{{ lookup('env','AMQ_BROKER_FACTS_DIR') | default(i
 amq_broker_start_server: true
 amq_broker_service_start: true
 amq_broker_force_kill: false
+amq_broker_kill_all: false
 
 # The system user used to run the broker instance
 amq_broker_default_user: jamq
