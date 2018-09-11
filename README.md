@@ -141,7 +141,7 @@ Variables which are defined in inventory file specific for given host
 
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
-| `external_address` | Not used by default | Useful if broker is running on internal network, but is VM is accessed from outside of this network |
+| `amq_broker_external_address` | Not used by default | Useful if broker is running on internal network, but is VM is accessed from outside of this network |
 
 
 Dependencies

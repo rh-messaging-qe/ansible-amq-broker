@@ -33,8 +33,8 @@ amq_broker_write_amq_facts: false
 
 # Path to locally generated facts about amq broker [/etc/ansible/facts.d/]
 #amq_broker_default_facts_file: /etc/ansible/facts.d/amq_broker.fact
-amq_broker_default_facts_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts/', true) }}/amq_broker_facts_{{ external_address | default(ansible_default_ipv4.address) }}"
-amq_broker_node_info_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts', true) }}/node_information_{{ external_address | default(ansible_default_ipv4.address) }}"
+amq_broker_default_facts_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts/', true) }}/amq_broker_facts_{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}"
+amq_broker_node_info_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts', true) }}/node_information_{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}"
 amq_broker_local_facts_dir: "{{ lookup('env','AMQ_BROKER_FACTS_DIR') | default(inventory_dir, true) }}"
 # Whether to start broker as a service
 amq_broker_start_server: true
