@@ -56,6 +56,9 @@ amq_broker_validate_certs: no
 # Download DB driver URL if environment variable is set
 amq_broker_db_driver_url: "{{ lookup('env','AMQ_BROKER_DB_DRIVER_DOWNLOAD_URL') | default(None) }}"
 
+# Shared store location on given node
+amq_broker_shared_store_dir: "{{ lookup('env','AMQ_SHARED_DIRECTORY') | default(None) }}"
+
 # Whether to install Java JVM and which one to install
 amq_broker_jvm_install: true
 amq_broker_jvm: java-1.8.0-openjdk-devel
