@@ -64,6 +64,7 @@
       become: true
       become_user: root
       command: 'pkill -9 -f "java.*artemis"'
+      register: kill_return
       ignore_errors: true
 
 - name: Print unknown brokers warning
