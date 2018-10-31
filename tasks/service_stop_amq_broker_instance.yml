@@ -48,7 +48,7 @@
     - name: Check running artemis process
       command: 'pgrep -f "java.*artemis"'
       register: unknown_artemis_pid
-      msg: "Unknown artemis running with pid= {{ unknown_artemis_pid }}"
+      # msg: "Unknown artemis running with pid= {{ unknown_artemis_pid }}"
       failed_when: unknown_artemis_pid.rc == 0
   rescue:
     - name: SIGKILL any artemis java process by {{ amq_broker_user }}
