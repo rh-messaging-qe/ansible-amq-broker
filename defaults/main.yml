@@ -88,13 +88,6 @@ amq_broker_default_admin_port: 8161
 amq_broker_default_cluster_port: 9876
 amq_broker_default_cluster_netty_connector_port: 61617
 
-# TODO not used much
-#amq_broker_main_port
-#amq_broker_amqp_port
-#amq_broker_mqtt_port
-#amq_broker_core_port
-#amq_broker_stomp_port
-#amq_broker_jmx_port
 
 # Jolokia stuff
 amq_broker_jolokia_allow_origin: "*://0.0.0.0*"
