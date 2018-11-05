@@ -62,7 +62,7 @@ amq_broker_shared_store_dir: "{{ lookup('env','AMQ_SHARED_DIRECTORY') | default(
 
 # Whether to install (manage) Java JVM and which one to install
 amq_broker_jvm_install: true
-amq_broker_jvm: "{{ lookup('env','JAVA_TYPE') | default('java-1.8.0-openjdk-devel') }}"   # java-11-openjdk-devel
+amq_broker_jvm: "{{ lookup('env','JAVA_TYPE') | default('java-1.8.0-openjdk') }}"   # java-11-openjdk-devel
 
 # Journal type for the broker instance
 amq_broker_instance_journal_type: nio
