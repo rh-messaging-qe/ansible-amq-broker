@@ -66,11 +66,16 @@
     group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
     force: true
 
-- name: Ensure correct ownership
+- name: Ensure correct ownership of broker destination
   tags:
     - broker
     - ownership
-  shell: chown -R "{{ amq_broker_user | default(amq_broker_default_user) }}":"{{ amq_broker_user | default(amq_broker_default_user) }}" {{ amq_broker_install_dest }}
+  file:
+    owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    path: "{{ amq_broker_install_dest }}"
+    recurse: yes
+    force: yes
 
 - name: Download JDBC DB connection driver
   when:
