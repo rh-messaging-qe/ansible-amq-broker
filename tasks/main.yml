@@ -35,6 +35,13 @@
   include: get_amq_broker_distribution.yml
   when: amq_broker_skip_install is defined and amq_broker_skip_install == false
 
+- name: Set up JVM
+  tags:
+    - jvm
+    - install
+  include: jvm_manage.yml
+  when: amq_broker_jvm_install == true
+
 - name: Create JBoss AMQ 7 Broker default instance
   tags:
     - broker
