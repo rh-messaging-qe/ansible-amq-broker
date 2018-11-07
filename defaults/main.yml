@@ -62,7 +62,7 @@ amq_broker_shared_store_dir: "{{ lookup('env','AMQ_SHARED_DIRECTORY') | default(
 
 # Whether to install (manage) Java JVM and which one to install
 amq_broker_jvm_install: true
-amq_broker_jvm: "{{ lookup('env','JAVA_TYPE') | default('java-1.8.0-openjdk') }}"   # java-11-openjdk-devel
+amq_broker_jvm: "{{ lookup('env','JAVA_TYPE') | default('java-1.8.0-openjdk', true) }}"   # java-11-openjdk-devel
 
 # Journal type for the broker instance
 amq_broker_instance_journal_type: nio
@@ -94,7 +94,7 @@ amq_broker_jolokia_allow_origin: "*://0.0.0.0*"
 
 amq_broker_instance_type: default
 
-amq_broker_cluster_group_address: "{{ lookup('env','AMQ_BROKER_CLUSTER_MCAST_ADDR') | default('231.7.7.7') }}"
+amq_broker_cluster_group_address: "{{ lookup('env','AMQ_BROKER_CLUSTER_MCAST_ADDR') | default('231.7.7.7', true) }}"
 amq_broker_cluster_broadcast_group_name: my-broadcast-group
 amq_broker_cluster_broadcast_group_address: 231.7.7.7
 amq_broker_cluster_broadcast_group_port: "{{ amq_broker_default_cluster_port }}"
