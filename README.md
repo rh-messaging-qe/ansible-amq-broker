@@ -48,8 +48,9 @@ Variables controlling broker installation parameters.
 | `amq_broker_install_link` | jboss-amq-7 | Friendly link name for the installation dir |
 | `amq_broker_download_url` | Upstream Apache Artemis 2+ | Download URL exported as environment variable AMQ_BROKER_DOWNLOAD_URL. If not defined, it uses Apache Artemis (upstream version)  (must be a zip file) |
 | `amq_broker_db_driver_url` | undefined | Download JDBC DB driver if environment variable AMQ_BROKER_DB_DRIVER_DOWNLOAD_URL is provided. |
+| `amq_broker_jvm_manage` | true | Whether to allow any management operations in regards to JVM/JDK. |
 | `amq_broker_jvm_install` | true | Whether to install a Java JVM. |
-| `amq_broker_jvm` | java-1.8.0-openjdk-devel | The Java JVM to install. |
+| `amq_broker_jvm` | java-1.8.0-openjdk | The Java JVM to install. Use `JAVA_TYPE` env variable for custom java (`openjdk-java-11`). |
 | `amq_broker_default_facts_file` | `/etc/ansible/facts.d/amq_broker.fact` | Generate broker related information to this file. |
 
 

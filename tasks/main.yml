@@ -40,7 +40,7 @@
     - jvm
     - install
   include: jvm_manage.yml
-  when: amq_broker_jvm_install == true
+  when: amq_broker_jvm_manage is defined and amq_broker_jvm_manage == true
 
 - name: Create JBoss AMQ 7 Broker default instance
   tags:

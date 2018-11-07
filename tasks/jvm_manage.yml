@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+# Install custom JDK package and set it in alternatives
 - name: Ensure Java VM package is present {{ amq_broker_jvm }}
   when:
     - amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
@@ -21,15 +22,33 @@
     - "{{ amq_broker_jvm }}-devel"
 
 - name: Get appropriate JVM version path
+  when:
+    - amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
   shell: 'alternatives --display java |grep -E "{{ amq_broker_jvm | regex_replace("-devel") | regex_replace("java-") | quote }}.*priority" | head -n 1| cut -d" " -f 1'
   register: java_alternatives_cmd
 
 - name: Set up java alternative to currently needed {{ java_alternatives_cmd.stdout }}
+  when:
+  - amq_broker_jvm is defined and amq_broker_jvm_install is defined and amq_broker_jvm_install == true
   alternatives:
     name: "java"
     link: "/usr/bin/java"
     path: "{{ java_alternatives_cmd.stdout }}"
 
+# OR use existing one
+- name: Set up java alternative from already installed JDK
+  when:
+    - amq_broker_jvm is defined and amq_broker_jvm_install == false
+  alternatives:
+    name: "{{ item }}"
+    link: "/usr/bin/{{ item }}"
+    path: "/opt/{{ amq_broker_jvm }}/bin/{{ item }}"
+  with_items:
+    - java
+    - javac
+
 - name: Get JVM executable
-  command: "which java"
+  command: "java -version"
   register: java_bin
+
+- debug: msg="{{ java_bin }}"
