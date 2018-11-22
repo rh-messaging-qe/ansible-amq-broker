@@ -66,6 +66,17 @@
     group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
     force: true
 
+- name: Create link to custom {{ amq_broker_custom_install_link }}
+  when: amq_broker_custom_install_link is defined
+  file:
+    src: "{{ amq_broker_install_dest }}/{{ archive_contents.files[0].split('/') | first }}"
+    dest: "{{ amq_broker_custom_install_link }}"
+    state: link
+    mode: 0755
+    owner: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    group: "{{ amq_broker_user | default(amq_broker_default_user) }}"
+    force: true
+
 - name: Ensure correct ownership of broker destination
   tags:
     - broker
