@@ -52,6 +52,7 @@ amq_broker_download_url: "{{ lookup('env','AMQ_BROKER_DOWNLOAD_URL') | default('
 amq_broker_download_dest: /tmp
 amq_broker_install_dest: /home/{{ amq_broker_user | default(amq_broker_default_user) }}
 amq_broker_default_install_link: jboss-amq-7
+amq_broker_custom_install_link: /opt/jboss-amq-7
 amq_broker_validate_certs: no
 
 # Download DB driver URL if environment variable is set
