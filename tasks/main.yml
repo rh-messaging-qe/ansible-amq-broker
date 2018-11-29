@@ -42,6 +42,15 @@
   include: jvm_manage.yml
   when: amq_broker_jvm_manage is defined and amq_broker_jvm_manage == true
 
+- name: Check if using IBM JVM (specialities)
+  shell: "java -version 2>&1 |grep -i ibm"
+  register: java_ibm_cmd
+
+- name: Set IBM java type
+  when: java_ibm_cmd is defined
+  set_fact:
+    java_ibm_type: "{% if java_ibm_cmd.rc == 0 %}true{% else %}false{% endif %}"
+
 - name: Create JBoss AMQ 7 Broker default instance
   tags:
     - broker
