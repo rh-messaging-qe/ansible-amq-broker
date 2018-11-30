@@ -142,7 +142,7 @@ amq_broker_instance_create_command: ./artemis create {{ amq_broker_instance_crea
 
 # Optional amq_broker_gssapi variables
 amq_broker_gssapi_enabled: false
-amq_broker_gssapi_broker_keytab_path: "{{ gssapi_realm_path }}/keytabs/{{ ansible_hostname }}.keytab"
+amq_broker_gssapi_sasl_login_config_scope: msgqekerb
 amq_broker_gssapi_broker_principal: "amqp/{{ ansible_fqdn }}"
-amq_broker_gssapi_sasl_login_config_scope: "{{ gssapi_sasl_login_config_scope }}"
-amq_broker_gssapi_conf_file_path: "{{ gssapi_realm_path }}/{{ gssapi_krb5_conf }}"
+amq_broker_gssapi_broker_keytab_path: "{{ lookup('env','AMQ_GSSAPI_KEYTABS_PATH') | default('<broker-keytab-path-here>', true) }}"
+amq_broker_gssapi_conf_file_path: "{{ lookup('env','AMQ_GSSAPI_KRB_CONF_PATH') | default('<broker-krb5conf-path-here>', true) }}"

@@ -45,6 +45,7 @@
 - name: Check if using IBM JVM (specialities)
   shell: "java -version 2>&1 |grep -i ibm"
   register: java_ibm_cmd
+  ignore_errors: yes
 
 - name: Set IBM java type
   when: java_ibm_cmd is defined
@@ -80,6 +81,10 @@
   when: amq_broker_instance_ha is defined and amq_broker_instance_ha == true
   set_fact:
     host_type: "{{ hostvars[inventory_hostname].group_names | select('match','master|slave') | list | first }}"
+
+- name: Check for GSSAPI files & set facts
+  when: amq_broker_gssapi_enabled is defined and amq_broker_gssapi_enabled == true
+  include: gssapi_helpers.yml
 
 - name: Write deployment configuration to facts
   tags:

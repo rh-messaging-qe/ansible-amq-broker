@@ -115,6 +115,19 @@ Variables controlling the configuration of a broker instance.
 | `amq_broker_instance_type` | default | Instance type (one of default, default-cluster, default-ha or jgroups-cluster) |
 
 
+Role Variables: Configuration of GSSAPI
+--------------
+
+Variables controlling the configuration of a broker instance.
+
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
+| `amq_broker_gssapi_enabled` | false | Whether GSSAPI/Kerberos configuration is enabled or not |
+| `amq_broker_gssapi_sasl_login_config_scope` | msgqekerb | JAAS login config scope name |
+| `amq_broker_gssapi_broker_principal` | `amqp/<hostname_fqdn>` | GSSAPI Principal name of broker |
+| `amq_broker_gssapi_broker_keytab_path` | None | Path to file or directory for principal keytab use env `AMQ_GSSAPI_KEYTABS_PATH` (if folder, `<hostname --short>.keytab` is assumed |
+| `amq_broker_gssapi_conf_file_path` | None | Path to `krb5.conf` file for used GSSAPI realm; use env `AMQ_GSSAPI_KRB_CONF_PATH` |
+
 
 Role Variables: Cluster Variables
 --------------
