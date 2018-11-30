@@ -38,7 +38,7 @@ java_ibm_type: {{ java_ibm_type }}
 {%- endif %}
 
 {% if amq_broker_gssapi_enabled == true %}
-gssapi_broker_keytab_path: {{ amq_broker_gssapi_broker_keytab_path }}
+gssapi_broker_keytab_path: {{ amq_broker_gssapi_broker_keytab_path_resolved }}
 gssapi_broker_principal: {{ amq_broker_gssapi_broker_principal }}
 gssapi_sasl_login_config_scope: {{ amq_broker_gssapi_sasl_login_config_scope }}
 gssapi_conf_file_path: {{ amq_broker_gssapi_conf_file_path }}
