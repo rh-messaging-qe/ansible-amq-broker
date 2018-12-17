@@ -33,8 +33,8 @@ allow_failback: {{ amq_broker_instance_ha_slave_allow_failback }}
 {% endif %}
 {%- endif %}
 
-{%- if java_ibm_type is defined %}
-java_ibm_type: {{ java_ibm_type }}
+{%- if jvm_vendor is defined %}
+jvm_vendor: {{ jvm_vendor }}
 {%- endif %}
 
 {% if amq_broker_gssapi_enabled == true %}

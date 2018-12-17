@@ -50,7 +50,7 @@
 - name: Set IBM java type
   when: java_ibm_cmd is defined
   set_fact:
-    java_ibm_type: "{% if java_ibm_cmd.rc == 0 %}true{% else %}false{% endif %}"
+    jvm_vendor: "{% if java_ibm_cmd.rc == 0 %}ibm{% else %}sun{% endif %}"
 
 - name: Create JBoss AMQ 7 Broker default instance
   tags:
