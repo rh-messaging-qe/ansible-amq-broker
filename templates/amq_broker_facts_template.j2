@@ -9,7 +9,6 @@ clustered: false
 {% else %}
 single_broker: false
 clustered: true
-cluster_load_balancing: {{ amq_broker_cluster_balancing }}
 cluster_multicast_address: {{ amq_broker_cluster_group_address }}
 cluster_multicast_port: {{ amq_broker_cluster_broadcast_group_port }}
 cluster_connector_address: {{ ansible_default_ipv4.address }}
