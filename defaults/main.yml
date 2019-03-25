@@ -146,3 +146,26 @@ amq_broker_gssapi_sasl_login_config_scope: msgqekerb
 amq_broker_gssapi_broker_principal: "amqp/{{ ansible_fqdn }}"
 amq_broker_gssapi_broker_keytab_path: "{{ lookup('env','AMQ_GSSAPI_KEYTABS_PATH') | default('<broker-keytab-path-here>', true) }}"
 amq_broker_gssapi_conf_file_path: "{{ lookup('env','AMQ_GSSAPI_KRB_CONF_PATH') | default('<broker-krb5conf-path-here>', true) }}"
+
+# initd/systemsd service variables for dependency on artemis-service-creator role
+custom_service_name: "artemis-{{ amq_broker_instance_dir }}"
+custom_service_default_service_opts: {
+    Description: "{% if 'artemis' in amq_broker_download_url|lower %}Apache ActiveMQ Artemis{% else %}Red Hat AMQ 7{% endif %}",
+    After: "syslog.target network.target",
+    Type: "simple",
+    Environment: [
+      "'JAVA_ARGS=\"--add-modules java.xml.bind\"'",
+    ],
+    PIDFile: "{{ amq_broker_instance_home }}/data/artemis.pid",
+    ExecStart: "{{ amq_broker_instance_home }}/bin/artemis run",
+#    ExecStop: "{{ amq_broker_instance_home }}/bin/artemis-service stop",
+#    ExecReload: "{{ amq_broker_instance_home }}/bin/artemis-service restart",
+    Restart: "always",
+    RestartSec: "10",
+    User: "{{ amq_broker_user | default(amq_broker_default_user) }}",
+    Group: "{{ amq_broker_user | default(amq_broker_default_user) }}",
+    UMask: "0027",
+    TimeoutStartSec: "3600",
+    SuccessExitStatus: "143",
+    WantedBy: "multi-user.target",
+  }
