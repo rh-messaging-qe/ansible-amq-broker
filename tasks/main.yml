@@ -13,82 +13,12 @@
 # limitations under the License.
 ---
 
-- name: Open JBoss AMQ 7 Broker ports
-  tags:
-    - broker
-    - firewall
-  include: setup_iptables.yml
-  when: amq_broker_skip_iptables is defined and amq_broker_skip_iptables != true and ansible_system == "Linux"
+- name: Install broker on Linux machine
+  when: ansible_os_family == 'Linux'
+  include: main_linux.yml
 
-# Always perform this check, not via handler
-- name: Stop JBoss AMQ 7 Broker default instance
-  tags:
-    - broker
-    - service
-    - stop-broker
-  include: service_stop_amq_broker_instance.yml
 
-- name: Get JBoss AMQ 7 Broker
-  tags:
-    - broker
-    - install
-  include: get_amq_broker_distribution.yml
-  when: amq_broker_skip_install is defined and amq_broker_skip_install == false
+- name: Install broker on Windows machine
+  when: ansible_os_family == 'Windows'
+  include: main_windows.yml
 
-- name: Set up JVM
-  tags:
-    - jvm
-    - install
-  include: jvm_manage.yml
-  when: amq_broker_jvm_manage is defined and amq_broker_jvm_manage == true
-
-- name: Check if using IBM JVM (specialities)
-  shell: "java -version 2>&1 |grep -i ibm"
-  register: java_ibm_cmd
-  ignore_errors: yes
-
-- name: Set IBM java type
-  when: java_ibm_cmd is defined
-  set_fact:
-    jvm_vendor: "{% if java_ibm_cmd.rc == 0 %}ibm{% else %}sun{% endif %}"
-
-- name: Create JBoss AMQ 7 Broker default instance
-  tags:
-    - broker
-    - install
-    - create-instance
-  include: create_amq_broker_instance.yml
-  when: amq_broker_skip_create is defined and amq_broker_skip_create == false
-
-- name: Configure JBoss AMQ 7 Broker default instance
-  tags:
-    - broker
-    - service
-    - configure
-  include: configure_amq_broker_instance.yml
-  when: amq_broker_skip_configure is defined and amq_broker_skip_configure == false
-
-- name: Close JBoss AMQ 7 Broker ports
-  tags:
-    - broker
-    - install
-    - firewall
-    - teardown
-  include: teardown_iptables.yml
-  when: amq_broker_skip_iptables is defined and amq_broker_skip_iptables != true and amq_broker_perform_teardown is defined and amq_broker_perform_teardown == true
-
-- name: Define host type (master|slave)
-  when: amq_broker_instance_ha is defined and amq_broker_instance_ha == true
-  set_fact:
-    host_type: "{{ hostvars[inventory_hostname].group_names | select('match','master|slave') | list | first }}"
-
-- name: Check for GSSAPI files & set facts
-  when: amq_broker_gssapi_enabled is defined and amq_broker_gssapi_enabled == true
-  include: gssapi_helpers.yml
-
-- name: Write deployment configuration to facts
-  tags:
-    - broker
-    - facts
-  when: amq_broker_write_amq_facts is defined and amq_broker_write_amq_facts == true
-  include: write_amq_facts.yml
