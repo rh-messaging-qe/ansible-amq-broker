@@ -76,7 +76,7 @@ Variables controlling the creation of a broker instance.
 | `amq_broker_instance_broker_host` | undefined | The host address to use (used for clustering) |
 | `amq_broker_instance_create_options` | --force --require-login --password=admin --http-host {{ amq_broker_instance_web_host }} | Extra options for creating the instance |
 | `amq_broker_instance_jmx_port` | 1099 | JMX port |
-| `amq_broker_instance_create_java_options` | -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ ansible_default_ipv4.address }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false {{ }} | Java options to pass to the instance create command |
+| `amq_broker_instance_create_java_options` | -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{ amq_broker_instance_jmx_port }} -Djava.rmi.server.hostname={{ amq_broker_default_ipv4_address }} -Dcom.sun.management.jmxremote.rmi.port={{ amq_broker_instance_jmx_port }} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false {{ }} | Java options to pass to the instance create command |
 | `amq_broker_instance_queues` | null | A list of queues to create when creating the instance |
 
 

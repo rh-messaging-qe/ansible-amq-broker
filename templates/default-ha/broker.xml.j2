@@ -17,7 +17,7 @@
 <configuration xmlns="urn:activemq" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:activemq /schema/artemis-configuration.xsd">
   <core xmlns="urn:activemq:core">
     <journal-buffer-timeout>4048000</journal-buffer-timeout>
-    <name>amq-{{ ansible_default_ipv4.address }}</name>
+    <name>amq-{{ amq_broker_default_ipv4_address }}</name>
     <journal-type>{{ (amq_broker_instance_journal_type == "nio") | ternary('NIO', 'ASYNCIO') }}</journal-type>
     <journal-min-files>2</journal-min-files>
     <journal-directory>./data/journal</journal-directory>
@@ -47,7 +47,7 @@
     <connectors>
       <!-- add connector to inter-servers communication -->
       <!-- use explicit IP address -->
-      <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ amq_broker_cluster_netty_connector_port }}</connector>
+      <connector name="netty-connector">tcp://{{ amq_broker_default_ipv4_address }}:{{ amq_broker_cluster_netty_connector_port }}</connector>
     </connectors>
     <!-- Clustering configuration -->
     <!-- A broadcast group is the means by which a server broadcasts connectors over the network.
