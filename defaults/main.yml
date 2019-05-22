@@ -33,8 +33,8 @@ amq_broker_write_amq_facts: false
 
 # Path to locally generated facts about amq broker [/etc/ansible/facts.d/]
 #amq_broker_default_facts_file: /etc/ansible/facts.d/amq_broker.fact
-amq_broker_default_facts_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts/', true) }}/amq_broker_facts_{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}"
-amq_broker_node_info_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts', true) }}/node_information_{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}"
+amq_broker_default_facts_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts/', true) }}/amq_broker_facts_{{ amq_broker_external_address | default(amq_broker_default_ipv4_address) }}"
+amq_broker_node_info_file: "{{ lookup('env','AMQ_BROKER_FACTS_NODE_DIR') | default('/tmp/facts', true) }}/node_information_{{ amq_broker_external_address | default(amq_broker_default_ipv4_address) }}"
 amq_broker_local_facts_dir: "{{ lookup('env','AMQ_BROKER_FACTS_DIR') | default(inventory_dir, true) }}"
 # Whether to start broker as a service
 amq_broker_start_server: true
@@ -128,7 +128,7 @@ amq_broker_instance_clustered_args: "{{ amq_broker_instance_clustered | ternary(
 
 amq_broker_instance_clustered_user_args: "{% if amq_broker_instance_clustered == true %} --cluster-user {{ amq_broker_cluster_username }} {% else %} '' {% endif %}"
 amq_broker_instance_clustered_password_args: "{% if amq_broker_instance_clustered == true %} --cluster-password {{ amq_broker_cluster_password }} {% else %} '' {% endif %}"
-amq_broker_instance_clustered_host_args: "{% if amq_broker_instance_clustered == true %} --host {{ amq_broker_instance_broker_host | default(ansible_default_ipv4.address) }} {% else %} '' {% endif %}"
+amq_broker_instance_clustered_host_args: "{% if amq_broker_instance_clustered == true %} --host {{ amq_broker_instance_broker_host | default(amq_broker_default_ipv4_address) }} {% else %} '' {% endif %}"
 amq_broker_instance_clustered_balancing_args: "{% if amq_broker_instance_clustered == true %} --message-load-balancing {{ amq_broker_cluster_balancing }} {% else %} '' {% endif %}"
 amq_broker_instance_clustered_maxhops_args: "{% if amq_broker_instance_clustered == true %} --max-hops {{ amq_broker_cluster_max_hops }} {% else %} '' {% endif %}"
 

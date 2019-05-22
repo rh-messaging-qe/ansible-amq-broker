@@ -46,15 +46,26 @@
 - set_fact:
     broker_home_path: "{{ archive_contents.files[0].path }}"
 
+- name: Check if broker directory exists
+  win_stat: path="{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}"
+  register: amq_broker_path_st
 
-- name: Remove broker instance directory
-  when: amq_broker_instance_create_force is defined and amq_broker_instance_create_force == true
-  win_file: path="{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}" state=absent
+- name: Uninstall and remove broker directory service, if exists
+  when: amq_broker_path_st
+  ignore_errors: yes
+  block:
+    - name: Stop artemis/amq7 service
+      win_command: "{{ amq_broker_instance_service_stop }}"
+
+    - name: Uninstall artemis service
+      win_command: "{{ amq_broker_instance_remove_service }}"
+
+    - name: Remove broker instance directory
+#      when: amq_broker_instance_create_force is defined and amq_broker_instance_create_force == true
+      win_file: path="{{ amq_broker_install_dest }}/{{ amq_broker_instance_dir }}" state=absent
 
 - name: Create broker instance
   win_command: "{{ amq_broker_instance_create_command }}"
-#  become: true
-#  become_user: "{{ amq_broker_user | default(amq_broker_default_user) }}"
   args:
     chdir: "{{ broker_home_path }}/bin"
 

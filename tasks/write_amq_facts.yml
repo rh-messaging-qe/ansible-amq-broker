@@ -13,7 +13,15 @@
 # limitations under the License.
 ---
 - name: Create facts dir if needed
+  when: ansible_os_family == 'Linux'
   file:
+    path: "{{ amq_broker_default_facts_file | dirname }}"
+    state: directory
+    recurse: yes
+
+- name: Create facts dir if needed
+  when: ansible_os_family == 'Windows'
+  win_file:
     path: "{{ amq_broker_default_facts_file | dirname }}"
     state: directory
     recurse: yes
@@ -33,11 +41,11 @@
 - name: Copy (fetch) generated file with details to master host node
   fetch:
     src: "{{ amq_broker_default_facts_file }}"
-    dest: "{{ amq_broker_local_facts_dir }}/amq_broker_facts_{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}.yaml"
+    dest: "{{ amq_broker_local_facts_dir }}/amq_broker_facts_{{ amq_broker_default_ipv4_address }}.yaml"
     flat: yes
 
 - name: Copy (fetch) generated node information file host node
   fetch:
     src: "{{ amq_broker_node_info_file }}"
-    dest: "{{ amq_broker_local_facts_dir }}/node_information_{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}.yaml"
+    dest: "{{ amq_broker_local_facts_dir }}/node_information_{{ amq_broker_default_ipv4_address }}.yaml"
     flat: yes

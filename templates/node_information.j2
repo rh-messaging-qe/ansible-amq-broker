@@ -1,7 +1,7 @@
 node_information:
-  default_address: {{ amq_broker_external_address | default(ansible_default_ipv4.address) }}
+  default_address: {{ amq_broker_external_address | default(amq_broker_default_ipv4_address) }}
   addresses:
-    default_ssh: {{ amq_broker_external_address | default(ansible_default_ipv4.address) }}
+    default_ssh: {{ amq_broker_external_address | default(amq_broker_default_ipv4_address) }}
     {% if amq_broker_external_address is defined -%}
-    internal: {{ ansible_default_ipv4.address }}
+    internal: {{amq_broker_default_ipv4_address }}
     {% endif -%}

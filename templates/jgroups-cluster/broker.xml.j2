@@ -24,7 +24,7 @@ under the License.
                xsi:schemaLocation="urn:activemq /schema/artemis-configuration.xsd">
    <core xmlns="urn:activemq:core">
 
-      <name>amq-{{ ansible_default_ipv4.address }}</name>
+      <name>amq-{{ amq_broker_default_ipv4_address }}</name>
 
       <persistence-enabled>true</persistence-enabled>
 
@@ -63,7 +63,7 @@ under the License.
 
       <connectors>
          <!-- Connector to me -->
-         <connector name="netty-connector">tcp://{{ ansible_default_ipv4.address }}:{{ amq_broker_cluster_netty_connector_port }}</connector>
+         <connector name="netty-connector">tcp://{{ amq_broker_default_ipv4_address }}:{{ amq_broker_cluster_netty_connector_port }}</connector>
       </connectors>
       <address-settings>
          <!--default for catch all-->

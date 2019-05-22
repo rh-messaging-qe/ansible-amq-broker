@@ -11,7 +11,7 @@ single_broker: false
 clustered: true
 cluster_multicast_address: {{ amq_broker_cluster_group_address }}
 cluster_multicast_port: {{ amq_broker_cluster_broadcast_group_port }}
-cluster_connector_address: {{ ansible_default_ipv4.address }}
+cluster_connector_address: {{ amq_broker_default_ipv4_address }}
 {% endif %}
 
 {%- if amq_broker_shared_store_dir is defined and amq_broker_shared_store_dir -%}
