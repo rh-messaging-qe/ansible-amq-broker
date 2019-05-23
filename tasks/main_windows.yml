@@ -77,9 +77,9 @@
   win_command: "{{ amq_broker_instance_service_start }}"
 
 
-#- name: Write deployment configuration to facts
-#  tags:
-#    - broker
-#    - facts
-#  when: amq_broker_write_amq_facts is defined and amq_broker_write_amq_facts == true
-#  include: write_amq_facts.yml
+- name: Write deployment configuration to facts
+  tags:
+    - broker
+    - facts
+  when: amq_broker_write_amq_facts is defined and amq_broker_write_amq_facts == true
+  include: write_amq_facts.yml
