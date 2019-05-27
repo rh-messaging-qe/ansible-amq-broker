@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+- name: Create download directory
+  win_file: path="{{ amq_broker_download_dest }}" state=directory
+
 - name: Download broker distribution
   tags:
     - broker
@@ -20,8 +23,7 @@
     validate_certs: "{{ amq_broker_validate_certs}} "
     url: "{{ amq_broker_download_url }}"
     dest: "{{ amq_broker_download_dest }}/{{ amq_broker_download_url | basename}}"
-    force: no
-#  register: dist_get
+    force: yes
 
 - name: "Unzip downloaded distribution to {{ amq_broker_install_dest }}"
   tags:
