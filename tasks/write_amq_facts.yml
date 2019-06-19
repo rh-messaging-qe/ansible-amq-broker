@@ -13,7 +13,7 @@
 # limitations under the License.
 ---
 - name: Create facts dir if needed
-  when: ansible_os_family == 'Linux'
+  when: ansible_system == 'Linux'
   file:
     path: "{{ amq_broker_default_facts_file | dirname }}"
     state: directory
