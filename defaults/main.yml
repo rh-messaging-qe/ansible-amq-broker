@@ -31,7 +31,7 @@ amq_broker_skip_configure: false
 # test automation tools that may need to inspect deployment details
 amq_broker_write_amq_facts: false
 
-amq_broker_default_ipv4_address: "{{ amq_broker_external_address | default(ansible_default_ipv4.address) }} "
+amq_broker_default_ipv4_address: "{{ amq_broker_external_address | default(ansible_default_ipv4.address) }}"
 
 # Path to locally generated facts about amq broker [/etc/ansible/facts.d/]
 #amq_broker_default_facts_file: /etc/ansible/facts.d/amq_broker.fact
