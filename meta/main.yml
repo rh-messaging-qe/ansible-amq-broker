@@ -230,3 +230,4 @@ galaxy_info:
 dependencies:
   - src: git+https://github.com/rh-messaging-qe/ansible-service-creator.git
     name: ansible-service-creator
+    version: mt_ans_upg
